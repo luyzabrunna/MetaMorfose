@@ -1,0 +1,255 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+}
+
+/* ── CONTAINER ── */
+.container {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* ── LADO ESQUERDO ── */
+.left {
+  width: 50%;
+  background:linear-gradient(to bottom, #3A1F72, #533989);;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* horizontal */
+  align-items: center;     /* vertical */
+  padding: 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.left::before {
+  content: '';
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  top: -120px;
+  left: -120px;
+}
+
+.left::after {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  bottom: 60px;
+  right: -80px;
+}
+
+.left-text {
+  position: relative;
+  z-index: 1;
+}
+
+.left-title {
+  font-size: 42px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+
+.left-sub {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.75);
+}
+ 
+.left-illustration {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-top: 32px;
+}
+
+.left-illustration img {
+  max-width: 100%;
+  max-height: 360px;
+  object-fit: contain;
+}
+
+/* ── LADO DIREITO ── */
+.right {
+  width: 50%;
+  background:linear-gradient(to bottom, #8363C6, #BAA2EB);;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding:40px;
+}
+
+.form-box {
+  width: 100%;
+  max-width: 420px;
+}
+
+.form-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.form-sub {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 28px;
+}
+
+/* ── CAMPOS ── */
+.field {
+  margin-bottom: 24px;
+}
+
+.field label {
+  display: block;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.field input {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  color: #1a1a2e;
+  outline: none;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.field input:focus {
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+}
+
+/* ── BOTÃO ── */
+.btn-criar {
+  width: 100%;
+  padding: 16px;
+  margin-top: 12px;
+  background: #8363C6;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-criar:hover {
+  background: #BAA2EB;
+}
+
+/* ── LINK LOGIN ── */
+.login-link {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.login-link a {
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+/* ── RESPONSIVO ── */
+/*Tablets / telas médias */
+@media (max-width: 1024px) {
+  .left-title {
+    font-size: 32px;
+  }
+
+  .left-sub {
+    font-size: 14px;
+  }
+
+  .form-box {
+    max-width: 380px;
+  }
+}
+
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .left,
+  .right {
+    width: 100%;
+  }
+
+  .left {
+    align-items: flex-start;
+    padding: 32px;
+  }
+
+  .right {
+    padding: 32px;
+  }
+}
+
+/* Celulares */
+@media (max-width: 600px) {
+  .left {
+    padding: 24px;
+  }
+
+  .left-title {
+    font-size: 26px;
+  }
+
+  .left-sub {
+    font-size: 13px;
+  }
+
+  .right {
+    padding: 24px;
+  }
+
+  .form-box {
+    max-width: 100%;
+  }
+
+  .field input {
+    padding: 14px;
+  }
+
+  .btn-criar {
+    padding: 14px;
+  }
+}
+
+@media (max-width: 600px) {
+  .left-illustration {
+    display: none;
+  }
+}
