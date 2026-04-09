@@ -1,0 +1,251 @@
+:root {
+    --roxo-escuro: #3A1E72;
+    --roxo-medio: #533989;
+    --roxo-claro: #8363C6;
+    --roxo-suave: #BAA2EB;
+
+    --branco: #ffffff;
+    --branco-75: rgba(255, 255, 255, 0.75);
+    --branco-70: rgba(255, 255, 255, 0.7);
+    --branco-60: rgba(255, 255, 255, 0.6);
+
+    --input-texto: #333;
+    --placeholder: #ccc;
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+}
+
+/* CONTAINER */
+.container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+
+/* ========== LADO ESQUERDO ========== */
+.lado-esquerdo {
+    flex: 1;
+    background: linear-gradient(135deg, var(--roxo-escuro), var(--roxo-medio));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 80px;
+    color: var(--branco);
+}
+
+.conteudo-esquerdo {
+    margin-bottom: 30px;
+}
+
+.conteudo-esquerdo h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.conteudo-esquerdo p {
+    font-size: 1.1rem;
+    color: var(--branco-75);
+}
+
+/* IMAGEM */
+.ilustracao {
+    width: 100%;
+    max-width: 420px;
+}
+
+.ilustracao img {
+    width: 100%;
+    height: auto;
+}
+
+/* ========== LADO DIREITO ========== */
+.lado-direito {
+    flex: 1;
+    background: linear-gradient(135deg, var(--roxo-claro), var(--roxo-suave));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 80px;
+}
+
+.conteudo-direito {
+    width: 100%;
+    max-width: 420px;
+    color: var(--branco);
+}
+
+.conteudo-direito h1 {
+    font-size: 2.2rem;
+    margin-bottom: 8px;
+}
+
+.subtitulo {
+    font-size: 1rem;
+    color: var(--branco-70);
+    margin-bottom: 40px;
+}
+
+/* FORM */
+.grupo-formulario {
+    margin-bottom: 20px;
+}
+
+.grupo-formulario label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--branco-75);
+    margin-bottom: 6px;
+}
+
+.grupo-formulario input {
+    width: 100%;
+    padding: 14px 18px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: var(--input-texto);
+    outline: none;
+}
+
+.grupo-formulario input::placeholder {
+    color: var(--placeholder);
+}
+
+.grupo-formulario input:focus {
+    box-shadow: 0 0 0 3px rgba(131, 99, 198, 0.4);
+}
+
+/* SENHA COM OLHINHO */
+.input-senha {
+    position: relative;
+}
+
+.input-senha input {
+    padding-right: 45px;
+}
+
+.toggle-senha {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 1.1rem;
+    opacity: 0.6;
+    transition: 0.2s;
+}
+
+.toggle-senha:hover {
+    opacity: 1;
+}
+
+/* BOTÃO */
+.botao-enviar {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.2);
+    color: var(--branco);
+    font-size: 1.05rem;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.2s;
+}
+
+.botao-enviar:hover {
+    transform: translateY(-2px);
+}
+
+.botao-enviar:active {
+    transform: translateY(0);
+}
+
+/* LINK LOGIN */
+.link-login {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 0.95rem;
+    color: var(--branco-60);
+}
+
+.link-login a {
+    color: var(--branco);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.link-login a:hover {
+    text-decoration: underline;
+}
+
+/* ========== RESPONSIVO ========== */
+@media (max-width: 1024px) {
+    .lado-esquerdo,
+    .lado-direito {
+        padding: 40px;
+    }
+
+    .conteudo-esquerdo h1 {
+        font-size: 2.2rem;
+    }
+
+    .conteudo-direito h1 {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .lado-esquerdo,
+    .lado-direito {
+        width: 100%;
+        padding: 40px 30px;
+        text-align: center;
+    }
+
+    .ilustracao {
+        margin: 20px auto 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .lado-esquerdo,
+    .lado-direito {
+        padding: 30px 20px;
+    }
+
+    .conteudo-esquerdo h1 {
+        font-size: 1.6rem;
+    }
+
+    .conteudo-direito h1 {
+        font-size: 1.4rem;
+    }
+
+    .grupo-formulario input {
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+
+    .botao-enviar {
+        padding: 12px;
+        font-size: 0.95rem;
+    }
+}

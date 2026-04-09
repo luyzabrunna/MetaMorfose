@@ -4,29 +4,35 @@
   padding: 0;
 }
 
+html, body {
+  width: 100%;
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
 body {
   font-family: 'Poppins', sans-serif;
-  min-height: 100vh;
 }
 
 /* ── CONTAINER ── */
 .container {
   display: flex;
   width: 100%;
-  min-height: 100vh;
+  min-height: 100dvh;
 }
 
-/* ── LADO ESQUERDO ── */
+/* ── LADO ESQUERDO (Desktop) ── */
 .left {
   width: 50%;
-  background:linear-gradient(to bottom, #3A1F72, #533989);;
+  background: linear-gradient(to bottom, #3A1F72, #533989);
   display: flex;
   flex-direction: column;
-  justify-content: center; /* horizontal */
-  align-items: center;     /* vertical */
+  justify-content: center;
+  align-items: center;
   padding: 48px;
   position: relative;
   overflow: hidden;
+  gap: 24px;
 }
 
 .left::before {
@@ -38,6 +44,7 @@ body {
   background: rgba(255, 255, 255, 0.05);
   top: -120px;
   left: -120px;
+  pointer-events: none;
 }
 
 .left::after {
@@ -49,19 +56,23 @@ body {
   background: rgba(255, 255, 255, 0.05);
   bottom: 60px;
   right: -80px;
+  pointer-events: none;
 }
 
 .left-text {
-  position: relative;
-  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  text-align: center;
 }
 
 .left-title {
-  font-size: 42px;
+  font-size: 48px;
   font-weight: 800;
   color: #fff;
   line-height: 1.1;
-  margin-bottom: 12px;
+  margin-bottom: 6px;
 }
 
 .left-sub {
@@ -72,32 +83,31 @@ body {
 .left-illustration {
   position: relative;
   z-index: 1;
-  flex: 1;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
-  padding-top: 32px;
+  width: 100%;
 }
 
 .left-illustration img {
   max-width: 100%;
-  max-height: 360px;
   object-fit: contain;
+  max-height: clamp(400px, 60vh, 500px);
 }
 
 /* ── LADO DIREITO ── */
 .right {
   width: 50%;
-  background:linear-gradient(to bottom, #8363C6, #BAA2EB);;
+  background: linear-gradient(to bottom, #8363C6, #BAA2EB);
   display: flex;
   justify-content: center;
   align-items: center;
-  padding:40px;
+  padding: 40px;
 }
 
 .form-box {
   width: 100%;
-  max-width: 420px;
+  max-width: 320px;
 }
 
 .form-title {
@@ -110,12 +120,12 @@ body {
 .form-sub {
   font-size: 14px;
   color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 28px;
+  margin-bottom: 20px;
 }
 
 /* ── CAMPOS ── */
 .field {
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 .field label {
@@ -128,12 +138,12 @@ body {
 
 .field input {
   width: 100%;
-  padding: 14px 18px;
+  padding: 10px 14px;
   border-radius: 12px;
   border: none;
   background: rgba(255, 255, 255, 0.9);
   font-family: 'Poppins', sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   color: #1a1a2e;
   outline: none;
   transition: background 0.2s, box-shadow 0.2s;
@@ -144,17 +154,49 @@ body {
   box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
 }
 
+/* SENHA COM ÍCONE */
+.input-senha {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-senha input {
+  padding-right: 50px;
+}
+
+.toggle-senha {
+  position: absolute;
+  right: 14px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
+}
+
+.toggle-senha svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+}
+
+.oculto {
+  display: none;
+}
+
 /* ── BOTÃO ── */
 .btn-criar {
   width: 100%;
-  padding: 16px;
+  padding: 12px;
   margin-top: 12px;
   background: #8363C6;
   color: #fff;
   border: none;
   border-radius: 12px;
   font-family: 'Poppins', sans-serif;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s;
@@ -181,75 +223,90 @@ body {
   text-decoration: underline;
 }
 
-/* ── RESPONSIVO ── */
-/*Tablets / telas médias */
-@media (max-width: 1024px) {
-  .left-title {
-    font-size: 32px;
-  }
-
-  .left-sub {
-    font-size: 14px;
-  }
-
-  .form-box {
-    max-width: 380px;
-  }
-}
-
-@media (max-width: 900px) {
-  .container {
-    flex-direction: column;
-  }
-
-  .left,
-  .right {
-    width: 100%;
-  }
-
-  .left {
-    align-items: flex-start;
-    padding: 32px;
-  }
-
-  .right {
-    padding: 32px;
-  }
-}
-
-/* Celulares */
-@media (max-width: 600px) {
-  .left {
-    padding: 24px;
-  }
-
-  .left-title {
-    font-size: 26px;
-  }
-
-  .left-sub {
-    font-size: 13px;
-  }
-
-  .right {
-    padding: 24px;
-  }
-
-  .form-box {
-    max-width: 100%;
-  }
-
-  .field input {
-    padding: 14px;
-  }
-
-  .btn-criar {
-    padding: 14px;
-  }
-}
-
-@media (max-width: 600px) {
-  .left-illustration {
+/*-- RESPONSIVO --*/
+/* Logo mobile/tablet - escondida por padrão */
+.mobile-logo {
     display: none;
-  }
+    margin-bottom: 32px;
+    text-align: left; /* ← alterado */
+    width: 100%;
+}
+
+.mobile-logo img {
+    max-width: 200px;
+    height: auto;
+    display: block;
+    margin: 0; /* ← removido o auto */
+}
+
+/* Tablets e celulares */
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column;
+        min-height: 100dvh;
+    }
+
+    /* Esconde a parte esquerda */
+    .left {
+        display: none;
+    }
+
+    /* Lado direito: Mantém centralizado na tela */
+    .right {
+        width: 100%;
+        flex: 1;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; /* Mantém tudo centralizado na tela */
+        padding: 24px 24px 32px
+    }
+
+    /* Mostra a logo e a alinha com o form-box */
+    .mobile-logo {
+        display: block;
+        margin-bottom: 16px;
+        
+        /* AQUI ESTÁ O TRUQUE: A logo ocupa o mesmo espaço do form */
+        width: 100%;
+        max-width: 360px; 
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left; /* Alinha o conteúdo (logo) à esquerda desse bloco */
+    }
+    
+    .mobile-logo img {
+        max-width: 160px;
+        display: block;
+        margin: 0; /* Remove margens para encostar na esquerda do bloco */
+    }
+
+    /* Formulário */
+    .form-box {
+        max-width: 360px;
+        width: 100%;
+        /* Text-align left garante que título e inputs comecem na mesma linha da logo */
+        text-align: left; 
+    }
+
+    .form-title { 
+        font-size: 28px; 
+        text-align: left; 
+    }
+    
+    .form-sub { 
+        font-size: 14px; 
+        text-align: left; 
+        margin-bottom: 24px; 
+    }
+    
+    .field input,
+    .btn-criar {
+        padding: 14px;
+        font-size: 14px;
+    }
+
+    .login-link {
+        margin-top: 24px;
+        text-align: left; /* Alinha o link também */
+    }
 }
