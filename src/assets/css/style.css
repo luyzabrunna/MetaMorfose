@@ -277,44 +277,57 @@ a {
 .card-title {
     font-size: 1.05rem;
     font-weight: 600;
-    color: #1a1a2e;
+    color: #8B5ED6;
     margin-bottom: 10px;
 }
 
 .card-desc {
     font-size: 0.85rem;
-    color: #7c7c9d;
+    color: #8B5ED6;
     line-height: 1.6;
 }
 
 /* ===== SEÇÃO: VISÃO CLARA ===== */
 .visao-clara {
-    background: linear-gradient(180deg, #EDE9FE 0%, #F5F3FF 60%, #EDE9FE 100%);
-    padding: 60px 0;
+    
+   background: linear-gradient(180deg, #EFE6FF 0%, #CCB8F2 100%);
+    padding: 200px 0;
     text-align: center;
 }
 
 .visao-container {
-    max-width: 680px;
+    max-width: 100% !important; /* Remove o limite de largura */
+    margin-left: 0 !important;   /* Remove a margem automática da esquerda */
+    padding-left: 0 !important;  /* Remove espaços internos da esquerda */
 }
 
 .visao-title {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: #2D1B69;
-    margin-bottom: 12px;
-    letter-spacing: -0.3px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    color: #5A4A8A;
+    
+    /* Posicionamento */
+    display: inline-block;
+    white-space: nowrap;
+    margin-left: 0;
+    margin-bottom: 0;
+    
+    /* O ajuste que  para a esquerda */
+    transform: translateX(-5px); 
+    
+    /* Espaçamento entre letras (0 é o padrão, então é opcional) */
+    letter-spacing: 0;
 }
 
 .visao-subtitle {
     font-size: 1rem;
-    color: #7C3AED;
+    color: #3A1E72;
     font-weight: 500;
 }
 
 /* ===== SEÇÃO: CTA FINAL (Call to Action) ===== */
 .cta-final {
-    background: linear-gradient(135deg, #EDE9FE 0%, #DDD6FE 50%, #C4B5FD 100%);
+    background-color: #BC9CFF;
     padding: 70px 0;
     text-align: center;
 }
@@ -329,7 +342,7 @@ a {
 .cta-title {
     font-size: 1.6rem;
     font-weight: 700;
-    color: #2D1B69;
+    color: #ffffff;
 }
 
 /* Botão grande de chamada para ação */
