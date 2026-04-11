@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Minhas Metas - MetaMorfose</title>
+  <link rel="stylesheet" href="../assets/css/visualizacaometas.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- OVERLAY -->
+  <div class="overlay" id="overlay" onclick="fecharMenu()"></div>
+
+  <!-- TOPBAR MOBILE -->
+  <div class="topbar-mobile">
+    <button class="btn-hamburguer" id="btnHamburguer" onclick="abrirMenu()">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+    <span class="logo-text-mobile">MetaMorfose</span>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <img src="logo.png" alt="MetaMorfose" class="logo-img" />
+      <button class="btn-fechar-menu" onclick="fecharMenu()">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="sidebar-criar">
+      <span>Criar<br>nova meta</span>
+      <button class="btn-plus"><i class="fa-solid fa-plus"></i></button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item">
+        <i class="fa-solid fa-table-cells-large"></i>
+        <span>Dashboard</span>
+      </a>
+      <a href="#" class="nav-item ativo">
+        <i class="fa-regular fa-circle-dot"></i>
+        <span>Metas</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i class="fa-regular fa-clock"></i>
+        <span>Sessões</span>
+      </a>
+    </nav>
+
+    <a href="#" class="sidebar-sair">
+      <i class="fa-solid fa-location-pin"></i>
+      <span>Sair</span>
+    </a>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+    <!-- BANNER -->
+    <div class="banner">
+      <div class="banner-text">
+        <h1>Minhas metas</h1>
+        <p>Acompanhe seu progresso</p>
+      </div>
+      <div class="banner-illustration">
+        <img src="illustration-metas.png" alt="Ilustração" />
+      </div>
+    </div>
+
+    <!-- GRID DE METAS -->
+    <div class="metas-grid">
+
+      <!-- Card 1 -->
+      <div class="meta-card">
+        <div class="meta-header">
+          <span class="meta-titulo">Estudar Java</span>
+          <span class="meta-prazo">até 30/04 <i class="fa-regular fa-clock"></i></span>
+        </div>
+        <div class="meta-progresso">
+          <div class="barra-fundo">
+            <div class="barra-preenchida" style="width: 60%"></div>
+          </div>
+          <span class="meta-porcentagem">60%</span>
+        </div>
+        <p class="meta-horas">12h de 20h</p>
+        <span class="meta-status em-andamento">Em andamento</span>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="meta-card">
+        <div class="meta-header">
+          <span class="meta-titulo">Estudar Java</span>
+          <span class="meta-prazo">até 30/04 <i class="fa-regular fa-clock"></i></span>
+        </div>
+        <div class="meta-progresso">
+          <div class="barra-fundo">
+            <div class="barra-preenchida" style="width: 60%"></div>
+          </div>
+          <span class="meta-porcentagem">60%</span>
+        </div>
+        <p class="meta-horas">12h de 20h</p>
+        <span class="meta-status em-andamento">Em andamento</span>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="meta-card">
+        <div class="meta-header">
+          <span class="meta-titulo">Estudar Java</span>
+          <span class="meta-prazo">até 30/04 <i class="fa-regular fa-clock"></i></span>
+        </div>
+        <div class="meta-progresso">
+          <div class="barra-fundo">
+            <div class="barra-preenchida" style="width: 60%"></div>
+          </div>
+          <span class="meta-porcentagem">60%</span>
+        </div>
+        <p class="meta-horas">12h de 20h</p>
+        <span class="meta-status em-andamento">Em andamento</span>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="meta-card">
+        <div class="meta-header">
+          <span class="meta-titulo">Estudar Java</span>
+          <span class="meta-prazo">até 30/04 <i class="fa-regular fa-clock"></i></span>
+        </div>
+        <div class="meta-progresso">
+          <div class="barra-fundo">
+            <div class="barra-preenchida" style="width: 60%"></div>
+          </div>
+          <span class="meta-porcentagem">60%</span>
+        </div>
+        <p class="meta-horas">12h de 20h</p>
+        <span class="meta-status em-andamento">Em andamento</span>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="meta-card">
+        <div class="meta-header">
+          <span class="meta-titulo">Estudar Java</span>
+          <span class="meta-prazo">até 30/04 <i class="fa-regular fa-clock"></i></span>
+        </div>
+        <div class="meta-progresso">
+          <div class="barra-fundo">
+            <div class="barra-preenchida" style="width: 60%"></div>
+          </div>
+          <span class="meta-porcentagem">60%</span>
+        </div>
+        <p class="meta-horas">12h de 20h</p>
+        <span class="meta-status em-andamento">Em andamento</span>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="meta-card">
+        <div class="meta-header">
+          <span class="meta-titulo">Estudar Java</span>
+          <span class="meta-prazo">até 30/04 <i class="fa-regular fa-clock"></i></span>
+        </div>
+        <div class="meta-progresso">
+          <div class="barra-fundo">
+            <div class="barra-preenchida" style="width: 60%"></div>
+          </div>
+          <span class="meta-porcentagem">60%</span>
+        </div>
+        <p class="meta-horas">12h de 20h</p>
+        <span class="meta-status em-andamento">Em andamento</span>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    function abrirMenu() {
+      document.getElementById('sidebar').classList.add('aberto');
+      document.getElementById('overlay').classList.add('ativo');
+    }
+    function fecharMenu() {
+      document.getElementById('sidebar').classList.remove('aberto');
+      document.getElementById('overlay').classList.remove('ativo');
+    }
+  </script>
+
+</body>
+</html>
