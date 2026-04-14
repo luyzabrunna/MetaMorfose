@@ -354,15 +354,31 @@ function initNavigation() {
 function handleRegister() {
     const metaInput = document.getElementById('metaInput');
     const dateInput = document.getElementById('dateInput');
-    const timeInput = document.getElementById('timeInput');
+    const hourInput = document.getElementById('hourInput');
+    const minuteInput = document.getElementById('minuteInput');
     
     const meta = metaInput?.value.trim();
     const date = dateInput?.value;
-    const time = timeInput?.value.trim();
+    const horas = hourInput?.value.trim();
+    const minutos = minuteInput?.value.trim();
 
+    // Validação
     if (!meta) { showToast('Por favor, selecione ou digite a meta.'); return; }
     if (!date) { showToast('Por favor, selecione a data.'); return; }
-    if (!time) { showToast('Por favor, informe o tempo estudado.'); return; }
+    
+    // Verifica se pelo menos um dos campos foi preenchido
+    if ((!horas || horas === '0') && (!minutos || minutos === '0')) { 
+        showToast('Por favor, informe o tempo estudado.'); 
+        return; 
+    }
+
+    // Junta horas e minutos no formato "Xh Ymin"
+    const h = horas && horas !== '0' ? horas : '0';
+    const m = minutos && minutos !== '0' ? minutos : '0';
+    const tempoFormatado = `${h}h ${m}min`;
+
+    console.log('Tempo registrado:', tempoFormatado);
+    // Aqui você pode enviar 'tempoFormatado' para sua API/PHP
 
     const modal = document.getElementById('successModal');
     if (modal) modal.classList.add('active');
@@ -378,9 +394,13 @@ function resetForm() {
 
     // Campos de texto
     const obsInput = document.getElementById('obsInput');
-    const timeInput = document.getElementById('timeInput');
     if (obsInput) obsInput.value = '';
-    if (timeInput) timeInput.value = '';
+    
+    // Inputs de horas e minutos (NOVO)
+    const hourInput = document.getElementById('hourInput');
+    const minuteInput = document.getElementById('minuteInput');
+    if (hourInput) hourInput.value = '';
+    if (minuteInput) minuteInput.value = '';
     
     // Data
     const dateInput = document.getElementById('dateInput');

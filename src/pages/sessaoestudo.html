@@ -138,8 +138,24 @@
 
                 <!-- Tempo estudado -->
                 <div class="form-group full-width">
-                    <label class="form-label" for="timeInput">Tempo estudado</label>
-                    <input type="text" class="form-input" id="timeInput" placeholder="Ex: 2h 30min">
+                    <label class="form-label">Tempo estudado</label>
+    
+                    <!-- Container Flex com espaçamento pequeno (gap: 10px) -->
+                    <div style="display: flex; gap: 10px; align-items: flex-start;">
+        
+                        <!-- Input de Horas -->
+                        <div style="flex: 1;">
+                            <label class="form-label" style="font-size: 0.85rem; color: #888; margin-bottom: 5px; display: block;">Horas</label>
+                            <input type="number" class="form-input" id="hourInput" min="0" placeholder="0" style="width: 100%;">
+                        </div>
+
+                        <!-- Input de Minutos -->
+                        <div style="flex: 1;">
+                            <label class="form-label" style="font-size: 0.85rem; color: #888; margin-bottom: 5px; display: block;">Minutos</label>
+                            <input type="number" class="form-input" id="minuteInput" min="0" max="59" placeholder="0" style="width: 100%;">
+                        </div>
+
+                    </div>
                 </div>
 
                 <!-- Botões -->
