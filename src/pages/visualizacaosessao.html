@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MetaMorfose - Minhas sessões de estudos</title>
+    
+    <!-- Fontes e Ícones -->
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/400.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/500.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/600.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/700.css" rel="stylesheet">
+
+
+    
+    <!-- Font Awesome para o novo menu -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    
+    <link rel="stylesheet" href="../assets/css/visualizacaosessao.css">
+</head>
+<body>
+
+    <!-- ===== OVERLAY E TOPBAR MOBILE (NOVO MENU) ===== -->
+    <div class="overlay" id="overlay" onclick="fecharMenu()"></div>
+
+    <div class="topbar-mobile">
+        <button class="btn-hamburguer" id="btnHamburguer" onclick="abrirMenu()">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <span class="logo-text-mobile"></span>
+    </div>
+
+    <!-- ===== SIDEBAR NOVA (SUBSTITUÍDA) ===== -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-logo">
+            <img src="../assets/images/logo.1.png" alt="MetaMorfose" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <span class="logo-fallback">MetaMorfose</span>
+            <button class="btn-fechar-menu" onclick="fecharMenu()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="sidebar-criar" onclick="abrirNovaMeta()">
+            <span>Criar<br>nova meta</span>
+            <button class="btn-plus"><i class="fa-solid fa-plus"></i></button>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active">
+                <i class="fa-solid fa-table-cells-large"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fa-regular fa-circle-dot"></i>
+                <span>Metas</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fa-regular fa-clock"></i>
+                <span>Sessões</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Progresso</span>
+            </a>
+        </nav>
+
+        <a href="#" class="sidebar-sair">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Sair</span>
+        </a>
+    </aside>
+
+    <!-- ===== MAIN CONTENT ORIGINAL (MANTIDO 100%) ===== -->
+    <main class="main-content">
+        
+        <!-- Header Banner (Original) -->
+        <div class="header-banner">
+            <div class="header-text">
+                <h1>Minhas sessões de estudos</h1>
+                <p>Sua vitrine de aprendizado.</p>
+            </div>
+            <div class="header-illustration">
+                <img src="../assets/images/imagemvisualsessao.png" alt="Ilustração de estudos">
+            </div>
+        </div>
+
+        <!-- Cards Grid (Original) -->
+        <div class="cards-grid">
+            <!-- Card 1 -->
+            <div class="session-card">
+                <div class="card-header">
+                    <span class="card-title">Estudar Java</span>
+                    <div class="card-meta">
+                        <span class="card-date">30/04</span>
+                        <span class="card-clock">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12,7 12,12 15.5,14" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill purple" style="width: 0%" data-width="89%"></div>
+                    </div>
+                    <div class="progress-info">
+                        <div class="progress-info-left">
+                            <span class="progress-label">1h de 20h</span>
+                        </div>
+                        <span class="progress-percent">89%</span>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill dark-purple" style="width: 0%" data-width="70%"></div>
+                    </div>
+                    <div class="progress-info">
+                        <span class="progress-label">nível de foco</span>
+                        <span class="progress-value">7 de 10</span>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill light-purple" style="width: 0%" data-width="60%"></div>
+                    </div>
+                    <div class="progress-info">
+                        <span class="progress-label">percepção de progresso</span>
+                        <span class="progress-value">6 de 10</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="session-card">
+                <div class="card-header">
+                    <span class="card-title">Estudar Java</span>
+                    <div class="card-meta">
+                        <span class="card-date">30/04</span>
+                        <span class="card-clock">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12,7 12,12 15.5,14" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill purple" style="width: 0%" data-width="89%"></div>
+                    </div>
+                    <div class="progress-info">
+                        <div class="progress-info-left">
+                            <span class="progress-label">1h de 20h</span>
+                        </div>
+                        <span class="progress-percent">89%</span>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill dark-purple" style="width: 0%" data-width="70%"></div>
+                    </div>
+                    <div class="progress-info">
+                        <span class="progress-label">nível de foco</span>
+                        <span class="progress-value">7 de 10</span>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill light-purple" style="width: 0%" data-width="60%"></div>
+                    </div>
+                    <div class="progress-info">
+                        <span class="progress-label">percepção de progresso</span>
+                        <span class="progress-value">6 de 10</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="session-card">
+                <div class="card-header">
+                    <span class="card-title">Estudar Java</span>
+                    <div class="card-meta">
+                        <span class="card-date">30/04</span>
+                        <span class="card-clock">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12,7 12,12 15.5,14" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill purple" style="width: 0%" data-width="89%"></div>
+                    </div>
+                    <div class="progress-info">
+                        <div class="progress-info-left">
+                            <span class="progress-label">1h de 20h</span>
+                        </div>
+                        <span class="progress-percent">89%</span>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill dark-purple" style="width: 0%" data-width="70%"></div>
+                    </div>
+                    <div class="progress-info">
+                        <span class="progress-label">nível de foco</span>
+                        <span class="progress-value">7 de 10</span>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill light-purple" style="width: 0%" data-width="60%"></div>
+                    </div>
+                    <div class="progress-info">
+                        <span class="progress-label">percepção de progresso</span>
+                        <span class="progress-value">6 de 10</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="session-card">
+                <div class="card-header">
+                    <span class="card-title">Estudar Java</span>
+                    <div class="card-meta">
+                        <span class="card-date">30/04</span>
+                        <span class="card-clock">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12,7 12,12 15.5,14" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill purple" style="width: 0%" data-width="89%"></div>
+                    </div>
+                    <div class="progress-info">
+                        <div class="progress-info-left">
+                            <span class="progress-label">1h de 20h</span>
+                        </div>
+                        <span class="progress-percent">89%</span>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill dark-purple" style="width: 0%" data-width="70%"></div>
+                    </div>
+                    <div class="progress-info">
+                        <span class="progress-label">nível de foco</span>
+                        <span class="progress-value">7 de 10</span>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill light-purple" style="width: 0%" data-width="60%"></div>
+                    </div>
+                    <div class="progress-info">
+                        <span class="progress-label">percepção de progresso</span>
+                        <span class="progress-value">6 de 10</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="session-card">
+                <div class="card-header">
+                    <span class="card-title">Estudar Java</span>
+                    <div class="card-meta">
+                        <span class="card-date">30/04</span>
+                        <span class="card-clock">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12,7 12,12 15.5,14" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill purple" style="width: 0%" data-width="89%"></div>
+                    </div>
+                    <div class="progress-info">
+                        <div class="progress-info-left">
+                            <span class="progress-label">1h de 20h</span>
+                        </div>
+                        <span class="progress-percent">89%</span>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill dark-purple" style="width: 0%" data-width="70%"></div>
+                    </div>
+                    <div class="progress-info">
+                        <span class="progress-label">nível de foco</span>
+                        <span class="progress-value">7 de 10</span>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill light-purple" style="width: 0%" data-width="60%"></div>
+                    </div>
+                    <div class="progress-info">
+                        <span class="progress-label">percepção de progresso</span>
+                        <span class="progress-value">6 de 10</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="session-card">
+                <div class="card-header">
+                    <span class="card-title">Estudar Java</span>
+                    <div class="card-meta">
+                        <span class="card-date">30/04</span>
+                        <span class="card-clock">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12,7 12,12 15.5,14" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill purple" style="width: 0%" data-width="89%"></div>
+                    </div>
+                    <div class="progress-info">
+                        <div class="progress-info-left">
+                            <span class="progress-label">1h de 20h</span>
+                        </div>
+                        <span class="progress-percent">89%</span>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill dark-purple" style="width: 0%" data-width="70%"></div>
+                    </div>
+                    <div class="progress-info">
+                        <span class="progress-label">nível de foco</span>
+                        <span class="progress-value">7 de 10</span>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill light-purple" style="width: 0%" data-width="60%"></div>
+                    </div>
+                    <div class="progress-info">
+                        <span class="progress-label">percepção de progresso</span>
+                        <span class="progress-value">6 de 10</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../assets/js/menu.js"></script>
+    <script src="../assets/js/barraprogesso.js"></script>
+</body>
+</html>
