@@ -4,27 +4,32 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Minhas Metas - MetaMorfose</title>
-  <link rel="stylesheet" href="../assets/css/visualizacaometas.css" />
+
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/400.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/500.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/600.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/700.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="../assets/css/visualizacaometas.css" />
 </head>
 <body>
 
-  <!-- OVERLAY -->
-  <div class="overlay" id="overlay" onclick="fecharMenu()"></div>
+   <!-- OVERLAY -->
+  <div class="overlay" id="overlay"></div>
 
   <!-- TOPBAR MOBILE -->
   <div class="topbar-mobile">
-    <button class="btn-hamburguer" id="btnHamburguer" onclick="abrirMenu()">
+    <img src="../assets/images/logo.1.png" alt="MetaMorfose" class="logo-mobile" />
+    <button class="btn-hamburguer" id="btnHamburguer">
       <i class="fa-solid fa-bars"></i>
     </button>
-    <span class="logo-text-mobile">MetaMorfose</span>
   </div>
 
   <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-logo">
-      <img src="logo.png" alt="MetaMorfose" class="logo-img" />
-      <button class="btn-fechar-menu" onclick="fecharMenu()">
+      <img src="../assets/images/logo.1.png" alt="MetaMorfose" class="logo-img" />
+      <button class="btn-fechar-menu" id="btnFecharSidebar"">
         <i class="fa-solid fa-xmark"></i>
       </button>
     </div>
@@ -50,7 +55,7 @@
     </nav>
 
     <a href="#" class="sidebar-sair">
-      <i class="fa-solid fa-location-pin"></i>
+      <i class="fa-solid fa-right-from-bracket"></i>
       <span>Sair</span>
     </a>
   </aside>
@@ -65,7 +70,7 @@
         <p>Acompanhe seu progresso</p>
       </div>
       <div class="banner-illustration">
-        <img src="illustration-metas.png" alt="Ilustração" />
+        <img src="../assets/images/imagemvisualizacaometas.png" alt="Ilustração" />
       </div>
     </div>
 
@@ -76,7 +81,7 @@
       <div class="meta-card">
         <div class="meta-header">
           <span class="meta-titulo">Estudar Java</span>
-          <span class="meta-prazo">até 30/04 <i class="fa-regular fa-clock"></i></span>
+          <span class="meta-prazo">até 30/04 <i class="fa-regular fa-circle-dot"></i></span>
         </div>
         <div class="meta-progresso">
           <div class="barra-fundo">
@@ -92,7 +97,7 @@
       <div class="meta-card">
         <div class="meta-header">
           <span class="meta-titulo">Estudar Java</span>
-          <span class="meta-prazo">até 30/04 <i class="fa-regular fa-clock"></i></span>
+          <span class="meta-prazo">até 30/04 <i class="fa-regular fa-circle-dot"></i></span>
         </div>
         <div class="meta-progresso">
           <div class="barra-fundo">
@@ -108,7 +113,7 @@
       <div class="meta-card">
         <div class="meta-header">
           <span class="meta-titulo">Estudar Java</span>
-          <span class="meta-prazo">até 30/04 <i class="fa-regular fa-clock"></i></span>
+          <span class="meta-prazo">até 30/04 <i class="fa-regular fa-circle-dot"></i></span>
         </div>
         <div class="meta-progresso">
           <div class="barra-fundo">
@@ -124,7 +129,7 @@
       <div class="meta-card">
         <div class="meta-header">
           <span class="meta-titulo">Estudar Java</span>
-          <span class="meta-prazo">até 30/04 <i class="fa-regular fa-clock"></i></span>
+          <span class="meta-prazo">até 30/04 <i class="fa-regular fa-circle-dot"></i></span>
         </div>
         <div class="meta-progresso">
           <div class="barra-fundo">
@@ -140,7 +145,7 @@
       <div class="meta-card">
         <div class="meta-header">
           <span class="meta-titulo">Estudar Java</span>
-          <span class="meta-prazo">até 30/04 <i class="fa-regular fa-clock"></i></span>
+          <span class="meta-prazo">até 30/04 <i class="fa-regular fa-circle-dot"></i></span>
         </div>
         <div class="meta-progresso">
           <div class="barra-fundo">
@@ -156,7 +161,7 @@
       <div class="meta-card">
         <div class="meta-header">
           <span class="meta-titulo">Estudar Java</span>
-          <span class="meta-prazo">até 30/04 <i class="fa-regular fa-clock"></i></span>
+          <span class="meta-prazo">até 30/04 <i class="fa-regular fa-circle-dot"></i></span>
         </div>
         <div class="meta-progresso">
           <div class="barra-fundo">
@@ -171,16 +176,8 @@
     </div>
   </main>
 
-  <script>
-    function abrirMenu() {
-      document.getElementById('sidebar').classList.add('aberto');
-      document.getElementById('overlay').classList.add('ativo');
-    }
-    function fecharMenu() {
-      document.getElementById('sidebar').classList.remove('aberto');
-      document.getElementById('overlay').classList.remove('ativo');
-    }
-  </script>
+   <!-- Script do menu (externo) -->
+  <script src="../assets/js/menu.js" defer></script>
 
 </body>
 </html>
