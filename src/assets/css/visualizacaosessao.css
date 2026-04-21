@@ -1,77 +1,97 @@
-/* ── RESET ── */
+/* ─────────────────────────────────────────────────────────────
+   🔹 RESET GLOBAL
+   Remove margens/paddings padrões e aplica box-sizing consistente
+   ─────────────────────────────────────────────────────────── */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin: 0;              /* Remove margem padrão de todos os elementos */
+    padding: 0;             /* Remove padding padrão */
+    box-sizing: border-box; /* Inclui border e padding no cálculo de largura/altura */
 }
 
-/* ── VARIÁVEIS (Novo menu) ── */
+/* ─────────────────────────────────────────────────────────────
+   🔹 VARIÁVEIS CSS (Custom Properties)
+   Centraliza cores e valores reutilizáveis para facilitar manutenção
+   ─────────────────────────────────────────────────────────── */
 :root {
-    --roxo-escuro: #3a1e72;
-    --roxo-medio: #533989;
-    --roxo-principal: #8363c6;
-    --roxo-claro: #baa2eb;
-    --roxo-fundo: #ede8f8;
-    --roxo-input: #f5f2ff;
-    --branco: #ffffff;
-    --texto-escuro: #2d1a52;
-    --texto-label: #533989;
-    --cinza-cancelar: #F5F2FF;
-    --sombra: 0 2px 12px rgba(100, 60, 180, 0.07);
-    --sombra-lg: 0 8px 24px rgba(58, 30, 114, 0.15);
-    --borda-radius: 12px;
-    --transicao: 0.2s ease;
+    /* Paleta de roxos - do mais escuro ao mais claro */
+    --roxo-escuro: #3a1e72;      /* Sidebar, header */
+    --roxo-medio: #533989;       /* Hover, destaques */
+    --roxo-principal: #8363c6;   /* Botões primários, ícones ativos */
+    --roxo-claro: #baa2eb;       /* Textos secundários, ícones inativos */
+    --roxo-fundo: #ede8f8;       /* Fundos suaves */
+    --roxo-input: #f5f2ff;       /* Background de inputs */
+    
+    /* Cores neutras */
+    --branco: #ffffff;           /* Fundos de cards, modais */
+    --texto-escuro: #2d1a52;     /* Títulos, textos principais */
+    --texto-label: #533989;      /* Labels de formulário */
+    --cinza-cancelar: #F5F2FF;   /* Botão cancelar */
+    
+    /* Efeitos visuais */
+    --sombra: 0 2px 12px rgba(100, 60, 180, 0.07);    /* Sombra leve */
+    --sombra-lg: 0 8px 24px rgba(58, 30, 114, 0.15);  /* Sombra forte (hover) */
+    --borda-radius: 12px;       /* Arredondamento padrão */
+    --transicao: 0.2s ease;     /* Duração padrão de animações */
 }
 
-/* ── LAYOUT GERAL ── */
+/* ─────────────────────────────────────────────────────────────
+   🔹 LAYOUT GERAL DO BODY
+   Configura fonte, fundo e estrutura flex da página
+   ─────────────────────────────────────────────────────────── */
 body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f0ecf5;
-    display: flex;
-    min-height: 100vh;
-    overflow-x: hidden;
-    color: var(--texto-escuro);
+    font-family: 'Poppins', sans-serif;  /* Fonte principal da aplicação */
+    background-color: #f0ecf5;           /* Cor de fundo suave */
+    display: flex;                       /* Layout flex para sidebar + conteúdo */
+    min-height: 100vh;                   /* Altura mínima = viewport */
+    overflow-x: hidden;                  /* Esconde scroll horizontal */
+    color: var(--texto-escuro);          /* Cor padrão do texto */
 }
 
-/* ═════ SIDEBAR NOVA ═════ */
+/* ════════════════════════════════════════════════════════════
+   🔹 SIDEBAR - MENU LATERAL
+   ════════════════════════════════════════════════════════════ */
+
 .sidebar {
-    width: 210px;
-    min-height: 100vh;
-    background-color: var(--roxo-escuro);
+    width: 210px;                        /* Largura fixa da sidebar */
+    min-height: 100vh;                   /* Ocupa altura total da tela */
+    background-color: var(--roxo-escuro);/* Fundo roxo escuro */
     display: flex;
-    flex-direction: column;
-    padding: 24px 16px;
-    position: fixed;
+    flex-direction: column;              /* Itens empilhados verticalmente */
+    padding: 24px 16px;                  /* Espaçamento interno */
+    position: fixed;                     /* Fixa na tela (não rola com conteúdo) */
     top: 0;
     left: 0;
     bottom: 0;
-    z-index: 100;
-    transition: left 0.3s ease;
+    z-index: 100;                        /* Fica acima do conteúdo principal */
+    transition: left 0.3s ease;          /* Animação para mobile (deslizar) */
 }
 
+/* Logo da sidebar */
 .sidebar-logo {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    margin-bottom: 28px;
+    justify-content: space-between;      /* Logo à esquerda, botão fechar à direita */
+    margin-bottom: 28px;                 /* Espaço abaixo do logo */
     padding-right: 4px;
 }
 
 .logo-img {
-    width: 160px;
-    height: auto;
-    object-fit: contain;
+    width: 160px;                        /* Largura da imagem do logo */
+    height: auto;                        /* Mantém proporção */
+    object-fit: contain;                 /* Ajusta imagem sem cortar */
 }
 
+/* Texto alternativo caso a imagem do logo não carregue */
 .logo-fallback {
     color: #fff;
     font-weight: 700;
     font-size: 14px;
-    display: none;
+    display: none;  /* Só aparece se a imagem falhar (via onerror no HTML) */
 }
 
+/* Botão X para fechar sidebar no mobile */
 .btn-fechar-menu {
-    display: none;
+    display: none;  /* Visível apenas em mobile via media query */
     background: none;
     border: none;
     color: var(--roxo-claro);
@@ -83,24 +103,25 @@ body {
 }
 
 .btn-fechar-menu:hover {
-    background: rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.1);  /* Leve destaque ao passar o mouse */
 }
 
+/* Botão "Criar nova meta" */
 .sidebar-criar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: var(--branco);
+    background-color: var(--branco);     /* Fundo branco para contraste */
     border-radius: var(--borda-radius);
     padding: 12px 14px;
     margin-bottom: 28px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Sombra sutil */
     cursor: pointer;
     transition: transform var(--transicao), box-shadow var(--transicao);
 }
 
 .sidebar-criar:hover {
-    transform: translateY(-1px);
+    transform: translateY(-1px);         /* Leve elevação no hover */
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
@@ -111,10 +132,11 @@ body {
     line-height: 1.4;
 }
 
+/* Botão + dentro de "Criar nova meta" */
 .btn-plus {
     background-color: var(--roxo-principal);
     border: none;
-    border-radius: 50%;
+    border-radius: 50%;                  /* Círculo perfeito */
     width: 30px;
     height: 30px;
     display: flex;
@@ -123,33 +145,34 @@ body {
     cursor: pointer;
     color: var(--branco);
     font-size: 14px;
-    flex-shrink: 0;
+    flex-shrink: 0;                      /* Não encolhe no flex */
     transition: background var(--transicao);
 }
 
 .btn-plus:hover {
-    background-color: var(--roxo-medio);
+    background-color: var(--roxo-medio); /* Tom mais escuro no hover */
 }
 
+/* Navegação da sidebar */
 .sidebar-nav {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    flex: 1;
+    gap: 6px;                            /* Espaço entre itens do menu */
+    flex: 1;                             /* Ocupa espaço disponível */
 }
 
-
+/* Itens do menu */
 .nav-item {
     display: flex;
     align-items: center;
-    gap: 12px;
-    color: var(--roxo-claro);
+    gap: 12px;                           /* Espaço entre ícone e texto */
+    color: var(--roxo-claro);            /* Cor padrão (inativo) */
     text-decoration: none;
     font-size: 15px;
     font-weight: 600;
     padding: 12px 15px;
     border-radius: 10px;
-    transition: none;
+    transition: none;                    /* Sem transição para evitar conflito */
 }
 
 .nav-item i {
@@ -160,15 +183,16 @@ body {
     transition: color var(--transicao);
 }
 
+/* Estado hover e ativo do menu */
 .nav-item:hover,
 .nav-item.active {
-    background-color: rgba(255,255,255,0.12);
-    color: var(--branco)
+    background-color: rgba(255,255,255,0.12); /* Fundo semi-transparente */
+    color: var(--branco);                      /* Texto branco */
 }
 
 .nav-item.active i,
 .nav-item:hover i {
-    color: var(--branco);
+    color: var(--branco);  /* Ícone branco quando ativo/hover */
 }
 
 .nav-item svg {
@@ -177,6 +201,7 @@ body {
     flex-shrink: 0;
 }
 
+/* Link "Sair" no final da sidebar */
 .sidebar-sair {
     display: flex;
     align-items: center;
@@ -186,7 +211,7 @@ body {
     font-size: 15px;
     font-weight: 600;
     padding: 10px 8px;
-    margin-top: auto;
+    margin-top: auto;        /* Empurra para o fundo da sidebar */
     border-radius: 8px;
     transition: background var(--transicao), color var(--transicao);
 }
@@ -206,17 +231,24 @@ body {
     color: var(--branco);
 }
 
-/* ═════ MAIN CONTENT ═════ */
+/* ════════════════════════════════════════════════════════════
+   🔹 CONTEÚDO PRINCIPAL (MAIN)
+   ════════════════════════════════════════════════════════════ */
+
 .main-content {
-    margin-left: 210px;
-    flex: 1;
-    padding: 30px 40px;
-    min-height: 100vh;
+    margin-left: 210px;              /* Espaço para sidebar fixa */
+    flex: 1;                         /* Ocupa resto da largura */
+    padding: 30px 40px;              /* Espaçamento interno */
+    min-height: 100vh;               /* Altura mínima = viewport */
 }
 
-/* ═════ HEADER BANNER (ORIGINAL) ═════ */
+/* ════════════════════════════════════════════════════════════
+   🔹 HEADER BANNER
+   Faixa roxa com título e ilustração no topo do conteúdo
+   ════════════════════════════════════════════════════════════ */
+
 .header-banner {
-    background: linear-gradient(135deg, #5b3a9e 0%, #4a2d85 100%);
+    background: linear-gradient(135deg, #5b3a9e 0%, #4a2d85 100%); /* Gradiente roxo */
     border-radius: 16px;
     padding: 35px 40px;
     display: flex;
@@ -224,7 +256,7 @@ body {
     justify-content: space-between;
     margin-bottom: 35px;
     overflow: hidden;
-    position: relative;
+    position: relative;  /* Para posicionar a ilustração */
 }
 
 .header-text h1 {
@@ -235,18 +267,19 @@ body {
 }
 
 .header-text p {
-    color: rgba(255, 255, 255, 0.75);
+    color: rgba(255, 255, 255, 0.75);  /* Branco com transparência */
     font-size: 18px;
     font-weight: 400;
 }
 
+/* Ilustração no canto do banner */
 .header-illustration {
     width: 280px;
     height: 160px;
     border-radius: 12px;
     overflow: hidden;
     flex-shrink: 0;
-    position: absolute;
+    position: absolute;  /* Posicionada fora do fluxo normal */
     right: -10px;
     top: -10px;
     opacity: 0.9;
@@ -255,32 +288,38 @@ body {
 .header-illustration img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover;  /* Preenche sem distorcer */
 }
 
-/* ═════ CARDS GRID (ORIGINAL) ═════ */
+/* ════════════════════════════════════════════════════════════
+   🔹 GRID DE CARDS
+   Layout em grade para os cards de sessão
+   ════════════════════════════════════════════════════════════ */
+
 .cards-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(3, 1fr);  /* 3 colunas iguais */
+    gap: 24px;                               /* Espaço entre cards */
 }
 
+/* Card individual de sessão */
 .session-card {
     background: #fff;
     border-radius: 14px;
     padding: 20px 22px;
-    box-shadow: 0 4px 20px rgba(61, 34, 115, 0.12);
+    box-shadow: 0 4px 20px rgba(61, 34, 115, 0.12);  /* Sombra roxa suave */
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     cursor: pointer;
-    animation: fadeInUp 0.5s ease forwards;
-    opacity: 0;
+    animation: fadeInUp 0.5s ease forwards;  /* Animação de entrada */
+    opacity: 0;  /* Começa invisível para animação */
 }
 
 .session-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 30px rgba(61, 34, 115, 0.18);
+    transform: translateY(-3px);  /* Eleva no hover */
+    box-shadow: 0 8px 30px rgba(61, 34, 115, 0.18);  /* Sombra mais forte */
 }
 
+/* Delay escalonado para animação de entrada dos cards */
 .session-card:nth-child(1) { animation-delay: 0.05s; }
 .session-card:nth-child(2) { animation-delay: 0.1s; }
 .session-card:nth-child(3) { animation-delay: 0.15s; }
@@ -288,6 +327,7 @@ body {
 .session-card:nth-child(5) { animation-delay: 0.25s; }
 .session-card:nth-child(6) { animation-delay: 0.3s; }
 
+/* Cabeçalho do card (título + data) */
 .card-header {
     display: flex;
     align-items: center;
@@ -321,17 +361,21 @@ body {
     stroke-width: 2;
 }
 
-/* ═════ PROGRESS BARS (ORIGINAL) ═════ */
+/* ════════════════════════════════════════════════════════════
+   🔹 BARRAS DE PROGRESSO
+   Visualização do progresso das sessões
+   ════════════════════════════════════════════════════════════ */
+
 .progress-section {
-    margin-bottom: 10px;
+    margin-bottom: 10px;  /* Espaço entre cada barra */
 }
 
 .progress-bar-container {
     width: 100%;
     height: 10px;
-    background: #e8e3f0;
+    background: #e8e3f0;  /* Fundo cinza-roxo claro */
     border-radius: 5px;
-    overflow: hidden;
+    overflow: hidden;      /* Esconde parte da barra que ultrapassa */
     display: flex;
     align-items: center;
 }
@@ -339,19 +383,20 @@ body {
 .progress-bar-fill {
     height: 100%;
     border-radius: 5px;
-    transition: width 1s ease-out;
+    transition: width 1s ease-out;  /* Animação suave ao carregar */
 }
 
+/* Cores das barras por tipo de métrica */
 .progress-bar-fill.purple {
-    background: linear-gradient(90deg, #7b5ea7, #9575cd);
+    background: linear-gradient(90deg, #7b5ea7, #9575cd);  /* Progresso principal */
 }
 
 .progress-bar-fill.dark-purple {
-    background: linear-gradient(90deg, #5b3a9e, #6d4fc2);
+    background: linear-gradient(90deg, #5b3a9e, #6d4fc2);  /* Nível de foco */
 }
 
 .progress-bar-fill.light-purple {
-    background: linear-gradient(90deg, #a78bfa, #c4b5fd);
+    background: linear-gradient(90deg, #a78bfa, #c4b5fd);  /* Percepção de progresso */
 }
 
 .progress-info {
@@ -380,21 +425,25 @@ body {
     font-weight: 600;
 }
 
-/* ═════ ELEMENTOS MOBILE ═════ */
+/* ════════════════════════════════════════════════════════════
+   🔹 ELEMENTOS MOBILE
+   Estilos para telas pequenas (responsividade)
+   ════════════════════════════════════════════════════════════ */
+
 .topbar-mobile {
-    display: none;
+    display: none;  /* Escondido em desktop, aparece via media query */
 }
 
 .overlay {
-    display: none;
+    display: none;  /* Fundo escuro para menu mobile */
     position: fixed;
-    inset: 0;
+    inset: 0;  /* Equivalente a top:0; right:0; bottom:0; left:0 */
     background: rgba(0,0,0,0.45);
     z-index: 99;
 }
 
 .overlay.ativo {
-    display: block;
+    display: block;  /* Mostra quando menu está aberto */
 }
 
 .btn-hamburguer {
@@ -404,7 +453,7 @@ body {
     font-size: 20px;
     cursor: pointer;
     padding: 4px;
-    display: none;
+    display: none;  /* Visível apenas em mobile */
 }
 
 .logo-text-mobile {
@@ -413,32 +462,40 @@ body {
     font-weight: 700;
 }
 
-/* ═════ ANIMAÇÕES (ORIGINAL) ═════ */
+/* ════════════════════════════════════════════════════════════
+   🔹 ANIMAÇÕES
+   ════════════════════════════════════════════════════════════ */
+
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(20px);  /* Começa 20px abaixo */
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0);     /* Termina na posição original */
     }
 }
 
-/* ═════ RESPONSIVIDADE ═════ */
+/* ════════════════════════════════════════════════════════════
+   🔹 MEDIA QUERIES - RESPONSIVIDADE
+   ════════════════════════════════════════════════════════════ */
+
+/* Telas até 1200px: reduz para 2 colunas */
 @media (max-width: 1200px) {
     .cards-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);  /* 2 colunas em vez de 3 */
     }
 }
 
+/* Telas até 900px: layout mobile completo */
 @media (max-width: 900px) {
     body {
-        flex-direction: column;
+        flex-direction: column;  /* Empilha sidebar e conteúdo */
     }
 
     .topbar-mobile {
-        display: flex;
+        display: flex;  /* Mostra barra superior mobile */
         justify-content: space-between;
         align-items: center;
         gap: 14px;
@@ -452,13 +509,13 @@ body {
     }
 
     .btn-hamburguer {
-        display: flex;
+        display: flex;  /* Mostra botão hamburguer */
     }
 
     .sidebar {
         position: fixed;
         top: 0;
-        left: -250px;
+        left: -250px;  /* Esconde sidebar fora da tela */
         width: 240px;
         z-index: 200;
         transition: left 0.3s ease;
@@ -466,33 +523,33 @@ body {
     }
 
     .sidebar.aberto {
-        left: 0;
+        left: 0;  /* Mostra sidebar ao adicionar classe 'aberto' */
     }
 
     .btn-fechar-menu {
-        display: flex;
+        display: flex;  /* Mostra botão X */
     }
 
     .main-content {
-        margin-left: 0;
-        padding: 80px 20px 30px;
+        margin-left: 0;  /* Remove margem da sidebar */
+        padding: 80px 20px 30px;  /* Ajusta padding para topbar */
     }
 
     .header-banner {
-        flex-direction: column;
+        flex-direction: column;  /* Empilha texto e imagem */
         align-items: flex-start;
         gap: 15px;
         padding-bottom: 30px;
     }
 
     .header-illustration {
-        position: static;
+        position: static;  /* Remove posicionamento absoluto */
         width: 100%;
         height: 140px;
     }
 
     .header-text h1 {
-        font-size: 22px;
+        font-size: 22px;  /* Fonte menor em mobile */
     }
 
     .header-text p {
@@ -500,12 +557,308 @@ body {
     }
 }
 
+/* Telas até 650px: 1 coluna apenas */
 @media (max-width: 650px) {
     .cards-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr;  /* Cards em coluna única */
     }
 
     .main-content {
-        padding: 80px 14px 30px;
+        padding: 80px 14px 30px;  /* Padding lateral reduzido */
     }
+}
+
+/* ════════════════════════════════════════════════════════════
+   🔹🔹🔹 NOVO: ESTILOS PARA EDITAR/EXCLUIR 🔹🔹🔹
+   (Adicione esta seção ao final do seu CSS)
+   ════════════════════════════════════════════════════════════ */
+
+/* ── Botões de Ação no Card ── */
+.card-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(192, 132, 252, 0.2);
+}
+
+.btn-action {
+    flex: 1;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.btn-action.btn-edit {
+    background: rgba(192, 132, 252, 0.15);
+    color: #a78bfa;
+}
+
+.btn-action.btn-edit:hover {
+    background: rgba(192, 132, 252, 0.3);
+    color: #7c3aed;
+}
+
+.btn-action.btn-delete {
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+}
+
+.btn-action.btn-delete:hover {
+    background: rgba(239, 68, 68, 0.3);
+    color: #ef4444;
+}
+
+/* ── Modais ── */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal {
+    background: #fff;
+    border-radius: 16px;
+    width: 420px;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 24px;
+    transform: scale(0.95) translateY(10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.modal-overlay.active .modal {
+    transform: scale(1) translateY(0);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.modal-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0;
+}
+
+.modal-close {
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 8px;
+    background: #f3f4f6;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b7280;
+    transition: 0.2s;
+}
+
+.modal-close:hover {
+    background: #e5e7eb;
+    color: #374151;
+}
+
+/* Formulário */
+.form-group { margin-bottom: 16px; }
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: #4b5563;
+    margin-bottom: 6px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    color: #1f2937;
+    transition: border-color 0.2s;
+    outline: none;
+}
+
+.form-group input:focus { border-color: #a78bfa; }
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+/* Botões do modal */
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+.btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #a78bfa, #7c3aed);
+    color: #fff;
+}
+
+.btn-primary:hover { filter: brightness(0.95); }
+
+.btn-secondary {
+    background: #f3f4f6;
+    color: #4b5563;
+}
+
+.btn-secondary:hover { background: #e5e7eb; }
+
+.btn-danger {
+    background: linear-gradient(135deg, #f87171, #ef4444);
+    color: #fff;
+}
+
+.btn-danger:hover { filter: brightness(0.95); }
+
+/* Modal de exclusão */
+.modal-delete .modal {
+    width: 340px;
+    text-align: center;
+}
+
+.delete-icon {
+    width: 56px;
+    height: 56px;
+    background: rgba(239, 68, 68, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    color: #ef4444;
+    font-size: 24px;
+}
+
+.delete-warning {
+    font-size: 12px;
+    color: #9ca3af;
+    margin-top: 8px;
+}
+
+.session-name {
+    font-weight: 600;
+    color: #1f2937;
+}
+
+/* Toast */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 3000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast {
+    background: #fff;
+    border-radius: 12px;
+    padding: 14px 18px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 280px;
+    animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s forwards;
+    border-left: 4px solid;
+}
+
+.toast.success { border-color: #10b981; }
+.toast.error { border-color: #ef4444; }
+
+.toast svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.toast.success svg { color: #10b981; }
+.toast.error svg { color: #ef4444; }
+
+.toast-message {
+    font-size: 14px;
+    font-weight: 500;
+    color: #1f2937;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .form-row { grid-template-columns: 1fr; }
+    .modal { width: 95vw; margin: 10px; }
+    .modal-delete .modal { width: 95vw; }
+}
+
+/* 🔹 Garante que o link se pareça com o botão original */
+.btn-action.btn-edit {
+    text-decoration: none;          /* Remove sublinhado padrão de link */
+    display: flex;                  /* Mantém o layout flex */
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.btn-action.btn-edit:active {
+    transform: scale(0.98);         /* Efeito de clique */
 }
