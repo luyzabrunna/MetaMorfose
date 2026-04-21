@@ -6,10 +6,12 @@
     <title>MetaMorfose - Minhas sessões de estudos</title>
     
     <!-- Fontes e Ícones -->
-    <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/400.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/500.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/600.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/700.css" rel="stylesheet">
+    
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/poppins@5.0.0/300.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/poppins@5.0.0/400.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/poppins@5.0.0/500.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/poppins@5.0.0/600.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/poppins@5.0.0/700.css" rel="stylesheet">
 
 
     
@@ -46,22 +48,33 @@
         </div>
 
         <nav class="sidebar-nav">
-            <a href="#" class="nav-item active">
-                <i class="fa-solid fa-table-cells-large"></i>
+            <a href="#" class="nav-item ">
+                <svg vieWBox="0 0 24 24" fill="none">
+                    <rect x="3" y="3" width="7" height="7" rx="1.5" fill="#c084fc"/>
+                    <rect x="14" y="3" width="7" height="7" rx="1.5" fill="rgba(192,132,252,0.4)"/>
+                    <rect x="3" y="14" width="7" height="7" rx="1.5" fill="rgba(192,132,252,0.4)"/>
+                    <rect x="14" y="14" width="7" height="7" rx="1.5" fill="rgba(192,132,252,0.4)"/>
+                </svg>
+
+                
                 <span>Dashboard</span>
             </a>
             <a href="#" class="nav-item">
-                <i class="fa-regular fa-circle-dot"></i>
+                <svg viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="9" stroke="#c084fc" stroke-width="2"/>
+                    <circle cx="12" cy="12" r="4" stroke="#c084fc" stroke-width="2"/>
+                    <circle cx="12" cy="12" r="1.5" fill="#c084fc"/>
+                </svg>
                 <span>Metas</span>
             </a>
-            <a href="#" class="nav-item">
-                <i class="fa-regular fa-clock"></i>
+            <a href="#" class="nav-item active">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="9" stroke="#c084fc" stroke-width="2"/>
+                    <polyline points="12,6 12,12 16,14" stroke="#c084fc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
                 <span>Sessões</span>
             </a>
-            <a href="#" class="nav-item">
-                <i class="fa-solid fa-chart-line"></i>
-                <span>Progresso</span>
-            </a>
+           
         </nav>
 
         <a href="#" class="sidebar-sair">
