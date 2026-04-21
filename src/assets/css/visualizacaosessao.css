@@ -576,14 +576,14 @@ body {
 /* ── Botões de Ação no Card ── */
 .card-actions {
     display: flex;
-    gap: 8px;
-    margin-top: 12px;
-    padding-top: 12px;
-    border-top: 1px solid rgba(192, 132, 252, 0.2);
+    gap: 8px;                          /* Espaço entre botões */
+    margin-top: 12px;                  /* Distância do conteúdo acima */
+    padding-top: 12px;                 /* Separador visual */
+    border-top: 1px solid rgba(192, 132, 252, 0.2); /* Linha divisória roxa suave */
 }
 
 .btn-action {
-    flex: 1;
+    flex: 1;                           /* Botões com largura igual */
     padding: 8px 12px;
     border: none;
     border-radius: 8px;
@@ -594,47 +594,49 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 6px;                          /* Espaço entre ícone e texto */
     transition: all 0.2s ease;
 }
 
-.btn-action.btn-edit {
-    background: rgba(192, 132, 252, 0.15);
-    color: #a78bfa;
+/* Botão Editar - tons de roxo */
+.btn-action.edit {
+    background: rgba(192, 132, 252, 0.15);  /* Fundo roxo bem claro */
+    color: #a78bfa;                         /* Texto roxo médio */
 }
 
-.btn-action.btn-edit:hover {
-    background: rgba(192, 132, 252, 0.3);
-    color: #7c3aed;
+.btn-action.edit:hover {
+    background: rgba(192, 132, 252, 0.3);   /* Mais opaco no hover */
+    color: #7c3aed;                         /* Roxo mais forte */
 }
 
-.btn-action.btn-delete {
-    background: rgba(239, 68, 68, 0.15);
-    color: #f87171;
+/* Botão Excluir - tons de vermelho */
+.btn-action.delete {
+    background: rgba(239, 68, 68, 0.15);   /* Fundo vermelho bem claro */
+    color: #f87171;                         /* Texto vermelho médio */
 }
 
-.btn-action.btn-delete:hover {
-    background: rgba(239, 68, 68, 0.3);
-    color: #ef4444;
+.btn-action.delete:hover {
+    background: rgba(239, 68, 68, 0.3);    /* Mais opaco no hover */
+    color: #ef4444;                         /* Vermelho mais forte */
 }
 
-/* ── Modais ── */
+/* ── Modal Base (Editar e Excluir) ── */
 .modal-overlay {
     position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(4px);
+    inset: 0;                              /* Cobre tela toda */
+    background: rgba(0, 0, 0, 0.6);        /* Fundo escuro semi-transparente */
+    backdrop-filter: blur(4px);            /* Efeito de desfoque atrás */
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 2000;
-    opacity: 0;
-    visibility: hidden;
+    z-index: 2000;                         /* Fica acima de tudo */
+    opacity: 0;                            /* Começa invisível */
+    visibility: hidden;                    /* Não interage quando invisível */
     transition: all 0.3s ease;
 }
 
 .modal-overlay.active {
-    opacity: 1;
+    opacity: 1;                            /* Visível quando ativo */
     visibility: visible;
 }
 
@@ -642,17 +644,17 @@ body {
     background: #fff;
     border-radius: 16px;
     width: 420px;
-    max-width: 90vw;
-    max-height: 90vh;
-    overflow-y: auto;
+    max-width: 90vw;                       /* Máximo 90% da largura da tela */
+    max-height: 90vh;                      /* Máximo 90% da altura */
+    overflow-y: auto;                      /* Scroll se conteúdo for grande */
     padding: 24px;
-    transform: scale(0.95) translateY(10px);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    transform: scale(0.95) translateY(10px); /* Começa ligeiramente menor e abaixo */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Animação suave */
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); /* Sombra forte para destaque */
 }
 
 .modal-overlay.active .modal {
-    transform: scale(1) translateY(0);
+    transform: scale(1) translateY(0);     /* Tamanho e posição normais quando ativo */
 }
 
 .modal-header {
@@ -661,10 +663,10 @@ body {
     align-items: center;
     margin-bottom: 20px;
     padding-bottom: 16px;
-    border-bottom: 1px solid #f3f4f6;
+    border-bottom: 1px solid #f3f4f6;      /* Linha divisória sutil */
 }
 
-.modal-title {
+.modal-header h2 {
     font-size: 18px;
     font-weight: 600;
     color: #1f2937;
@@ -690,8 +692,10 @@ body {
     color: #374151;
 }
 
-/* Formulário */
-.form-group { margin-bottom: 16px; }
+/* ── Formulário do Modal ── */
+.form-group {
+    margin-bottom: 16px;
+}
 
 .form-group label {
     display: block;
@@ -713,15 +717,17 @@ body {
     outline: none;
 }
 
-.form-group input:focus { border-color: #a78bfa; }
+.form-group input:focus {
+    border-color: #a78bfa;  /* Borda roxa ao focar */
+}
 
 .form-row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;  /* Duas colunas */
     gap: 12px;
 }
 
-/* Botões do modal */
+/* ── Botões do Modal ── */
 .modal-actions {
     display: flex;
     gap: 10px;
@@ -745,58 +751,68 @@ body {
     color: #fff;
 }
 
-.btn-primary:hover { filter: brightness(0.95); }
+.btn-primary:hover {
+    filter: brightness(0.95);  /* Leve escurecimento no hover */
+}
 
 .btn-secondary {
     background: #f3f4f6;
     color: #4b5563;
 }
 
-.btn-secondary:hover { background: #e5e7eb; }
+.btn-secondary:hover {
+    background: #e5e7eb;
+}
 
 .btn-danger {
     background: linear-gradient(135deg, #f87171, #ef4444);
     color: #fff;
 }
 
-.btn-danger:hover { filter: brightness(0.95); }
+.btn-danger:hover {
+    filter: brightness(0.95);
+}
 
-/* Modal de exclusão */
-.modal-delete .modal {
-    width: 340px;
+/* ── Modal de Exclusão (estilo específico) ── */
+.delete-modal .modal {
+    width: 340px;  /* Mais estreito para confirmação */
     text-align: center;
 }
 
 .delete-icon {
     width: 56px;
     height: 56px;
-    background: rgba(239, 68, 68, 0.1);
-    border-radius: 50%;
+    background: rgba(239, 68, 68, 0.1);  /* Fundo vermelho bem claro */
+    border-radius: 50%;                   /* Círculo */
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 16px;
+    margin: 0 auto 16px;                  /* Centralizado */
     color: #ef4444;
     font-size: 24px;
 }
 
-.delete-warning {
-    font-size: 12px;
-    color: #9ca3af;
-    margin-top: 8px;
+.delete-modal h2 {
+    margin-bottom: 8px;
 }
 
-.session-name {
+.delete-modal p {
+    color: #6b7280;
+    font-size: 14px;
+    margin: 4px 0;
+}
+
+.delete-modal .session-name {
     font-weight: 600;
     color: #1f2937;
 }
 
-/* Toast */
+/* ── Toast Notification (feedback visual) ── */
 .toast-container {
     position: fixed;
     top: 20px;
     right: 20px;
-    z-index: 3000;
+    z-index: 3000;  /* Acima dos modais */
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -812,11 +828,16 @@ body {
     gap: 10px;
     min-width: 280px;
     animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s forwards;
-    border-left: 4px solid;
+    border-left: 4px solid;  /* Barra colorida à esquerda */
 }
 
-.toast.success { border-color: #10b981; }
-.toast.error { border-color: #ef4444; }
+.toast.success { 
+    border-color: #10b981;  /* Verde para sucesso */
+}
+
+.toast.error { 
+    border-color: #ef4444;  /* Vermelho para erro */
+}
 
 .toast svg {
     width: 20px;
@@ -843,22 +864,16 @@ body {
     to { opacity: 0; }
 }
 
-/* Responsivo */
+/* ── Responsivo para Modais ── */
 @media (max-width: 768px) {
-    .form-row { grid-template-columns: 1fr; }
-    .modal { width: 95vw; margin: 10px; }
-    .modal-delete .modal { width: 95vw; }
-}
-
-/* 🔹 Garante que o link se pareça com o botão original */
-.btn-action.btn-edit {
-    text-decoration: none;          /* Remove sublinhado padrão de link */
-    display: flex;                  /* Mantém o layout flex */
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-}
-
-.btn-action.btn-edit:active {
-    transform: scale(0.98);         /* Efeito de clique */
+    .form-row { 
+        grid-template-columns: 1fr;  /* Empilha campos em mobile */
+    }
+    .modal { 
+        width: 95vw;  /* Quase toda largura da tela */
+        margin: 10px;
+    }
+    .delete-modal .modal { 
+        width: 95vw;
+    }
 }
