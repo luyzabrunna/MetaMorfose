@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Detalhes da Meta - MetaMorfose</title>
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/400.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/500.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/600.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/700.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="../assets/css/detalhemeta.css" />
+</head>
+<body>
+
+  <!-- OVERLAY -->
+  <div class="overlay" id="overlay" onclick="fecharMenu()"></div>
+
+  <!-- TOPBAR MOBILE -->
+  <div class="topbar-mobile">
+    <img src="../assets/images/logo.1.png" alt="MetaMorfose" class="logo-mobile" />
+    <button class="btn-hamburguer" id="btnHamburguer"">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <img src="../assets/images/logo.1.png" alt="MetaMorfose" class="logo-img" />
+      <button class="btn-fechar-menu" id="btnHamburguer"">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="sidebar-criar">
+      <span>Criar<br>nova meta</span>
+      <button class="btn-plus"><i class="fa-solid fa-plus"></i></button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item">
+        <i class="fa-solid fa-table-cells-large"></i>
+        <span>Dashboard</span>
+      </a>
+      <a href="#" class="nav-item ativo">
+        <i class="fa-regular fa-circle-dot"></i>
+        <span>Metas</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i class="fa-regular fa-clock"></i>
+        <span>Sessões</span>
+      </a>
+    </nav>
+
+    <a href="#" class="sidebar-sair">
+      <i class="fa-solid fa-right-from-bracket"></i>
+      <span>Sair</span>
+    </a>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+    <!-- BANNER -->
+    <div class="banner">
+      <div class="banner-text">
+        <h1>Acompanhe sua evolução</h1>
+        <p>Visualize o progresso e o histórico da sua meta</p>
+      </div>
+      <div class="banner-illustration">
+        <img src="../assets/images/imagemdetalhemeta.png" alt="Ilustração" />
+      </div>
+    </div>
+
+    <!-- CARD DETALHES DA META -->
+    <div class="card">
+      <h2 class="card-titulo">Detalhes da Meta</h2>
+
+      <div class="meta-info">
+        <div class="meta-campo">
+          <span class="campo-label">Título</span>
+          <span class="campo-valor">Estudar Java</span>
+        </div>
+        <div class="meta-campo">
+          <span class="campo-label">Prazo</span>
+          <span class="campo-valor">30/04/2026</span>
+        </div>
+        <div class="meta-campo">
+          <span class="campo-label">Status</span>
+          <span class="campo-valor">
+            <span class="badge em-andamento">Em andamento</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="meta-descricao">
+        <span class="campo-label">Descrição</span>
+        <p>Dominar os fundamentos de Java orientado a objetos para construir aplicações robustas e escaláveis.</p>
+      </div>
+
+      <div class="meta-progresso">
+        <div class="progresso-topo">
+          <span class="campo-label">Progresso</span>
+          <span class="porcentagem">60%</span>
+        </div>
+        <div class="barra-fundo">
+          <div class="barra-preenchida" style="width: 60%"></div>
+        </div>
+        <span class="horas-texto">12h de 20h estudadas</span>
+      </div>
+
+      <div class="meta-acoes">
+        <button class="btn-editar">Editar</button>
+        <button class="btn-excluir">Excluir</button>
+      </div>
+    </div>
+
+    <!-- CARD SESSÕES DE ESTUDO -->
+    <div class="card">
+      <div class="sessoes-header">
+        <h2 class="card-titulo">Sessões de estudo</h2>
+        <button class="btn-nova-sessao">NOVA SESSÃO</button>
+      </div>
+
+      <div class="sessoes-grid">
+
+        <!-- Sessão 1 -->
+        <div class="sessao-card">
+          <div class="sessao-header">
+            <span class="sessao-titulo">Estudar java</span>
+            <span class="sessao-data">30/04 <i class="fa-regular fa-clock"></i></span>
+          </div>
+          <p class="sessao-horas">1h de 20h</p>
+
+          <div class="sessao-barra-grupo">
+            <div class="barra-fundo">
+              <div class="barra-preenchida gradiente-1" style="width: 89%"></div>
+            </div>
+            <span class="barra-pct">89%</span>
+          </div>
+
+          <div class="sessao-avaliacao">
+            <span class="avaliacao-label">Nível de foco</span>
+            <div class="barra-fundo">
+              <div class="barra-preenchida" style="width: 70%"></div>
+            </div>
+            <span class="avaliacao-valor">7 de 10</span>
+          </div>
+
+          <div class="sessao-avaliacao">
+            <span class="avaliacao-label">Percepção de progresso</span>
+            <div class="barra-fundo">
+              <div class="barra-preenchida  gradiente-2" style="width: 60%"></div>
+            </div>
+            <span class="avaliacao-valor">6 de 10</span>
+          </div>
+
+          <p class="sessao-obs">Revisão de loops e arrays</p>
+
+          <div class="sessao-acoes">
+            <button class="btn-editar">Editar</button>
+            <button class="btn-excluir">Excluir</button>
+          </div>
+        </div>
+
+        <!-- Sessão 2 -->
+        <div class="sessao-card">
+          <div class="sessao-header">
+            <span class="sessao-titulo">Estudar java</span>
+            <span class="sessao-data">30/04 <i class="fa-regular fa-clock"></i></span>
+          </div>
+          <p class="sessao-horas">1h de 20h</p>
+
+          <div class="sessao-barra-grupo">
+            <div class="barra-fundo">
+              <div class="barra-preenchida gradiente-1" style="width: 89%"></div>
+            </div>
+            <span class="barra-pct">89%</span>
+          </div>
+
+          <div class="sessao-avaliacao">
+            <span class="avaliacao-label">Nível de foco</span>
+            <div class="barra-fundo">
+              <div class="barra-preenchida" style="width: 70%"></div>
+            </div>
+            <span class="avaliacao-valor">7 de 10</span>
+          </div>
+
+          <div class="sessao-avaliacao">
+            <span class="avaliacao-label">Percepção de progresso</span>
+            <div class="barra-fundo">
+              <div class="barra-preenchida gradiente-2" style="width: 60%"></div>
+            </div>
+            <span class="avaliacao-valor">6 de 10</span>
+          </div>
+
+          <p class="sessao-obs">Revisão de loops e arrays</p>
+
+          <div class="sessao-acoes">
+            <button class="btn-editar">Editar</button>
+            <button class="btn-excluir">Excluir</button>
+          </div>
+        </div>
+
+        <!-- Sessão 3 -->
+        <div class="sessao-card">
+          <div class="sessao-header">
+            <span class="sessao-titulo">Estudar java</span>
+            <span class="sessao-data">30/04 <i class="fa-regular fa-clock"></i></span>
+          </div>
+          <p class="sessao-horas">1h de 20h</p>
+
+          <div class="sessao-barra-grupo">
+            <div class="barra-fundo">
+              <div class="barra-preenchida gradiente-1" style="width: 89%"></div>
+            </div>
+            <span class="barra-pct">89%</span>
+          </div>
+
+          <div class="sessao-avaliacao">
+            <span class="avaliacao-label">Nível de foco</span>
+            <div class="barra-fundo">
+              <div class="barra-preenchida" style="width: 70%"></div>
+            </div>
+            <span class="avaliacao-valor">7 de 10</span>
+          </div>
+
+          <div class="sessao-avaliacao">
+            <span class="avaliacao-label">Percepção de progresso</span>
+            <div class="barra-fundo">
+              <div class="barra-preenchida  gradiente-2" style="width: 60%"></div>
+            </div>
+            <span class="avaliacao-valor">6 de 10</span>
+          </div>
+
+          <p class="sessao-obs">Revisão de loops e arrays</p>
+
+          <div class="sessao-acoes">
+            <button class="btn-editar">Editar</button>
+            <button class="btn-excluir">Excluir</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+  
+  <!-- Script do menu (externo) -->
+  <script src="../assets/js/menu.js" defer></script>
+
+</body>
+</html>
