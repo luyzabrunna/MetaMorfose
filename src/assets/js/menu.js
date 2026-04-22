@@ -68,13 +68,12 @@
       });
     }
 
-    // Botão "Criar nova meta" (+)
+    // Botão "Criar nova meta" (+) — não fecha o menu
     if (elements.btnCriar) {
       elements.btnCriar.addEventListener('click', (e) => {
         e.preventDefault();
-        if (menuAberto) fecharMenu();
-        // Aqui você pode redirecionar ou abrir modal de criação
-        // Ex: window.location.href = 'criar-meta.html';
+        // Aqui você pode redirecionar para a página de criar meta
+        // Ex: window.location.href = '../views/criarmeta.php';
         console.log('Abrir formulário de nova meta');
       });
     }
@@ -97,12 +96,12 @@
    */
   function abrirMenu() {
     if (menuAberto) return;
-    
+
     elements.sidebar.classList.add('aberto');
     elements.overlay.classList.add('ativo');
     document.body.style.overflow = 'hidden'; // Trava scroll do body
     menuAberto = true;
-    
+
     // Dispara evento customizado (útil para integrações)
     document.dispatchEvent(new CustomEvent('menuAberto'));
   }
@@ -112,12 +111,12 @@
    */
   function fecharMenu() {
     if (!menuAberto) return;
-    
+
     elements.sidebar.classList.remove('aberto');
     elements.overlay.classList.remove('ativo');
     document.body.style.overflow = ''; // Restaura scroll
     menuAberto = false;
-    
+
     // Dispara evento customizado
     document.dispatchEvent(new CustomEvent('menuFechado'));
   }

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - MetaMorfose</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/400.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/500.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/600.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/700.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  
+    <link rel="stylesheet" href="../assets/css/dashboard.css" />
+</head>
+<body>
+
+    <!-- OVERLAY -->
+  <div class="overlay" id="overlay"></div>
+ 
+  <!-- TOPBAR MOBILE -->
+  <div class="topbar-mobile">
+    <img src="../assets/images/logo.1.png" alt="MetaMorfose" class="logo-mobile" />
+    <button class="btn-hamburguer" id="btnHamburguer">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </div>
+ 
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <img src="../assets/images/logo.1.png" alt="MetaMorfose" class="logo-img" />
+      <button class="btn-fechar-menu" id="btnFecharSidebar">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+ 
+    <div class="sidebar-criar">
+      <span>Criar<br>nova meta</span>
+      <button class="btn-plus"><i class="fa-solid fa-plus"></i></button>
+    </div>
+ 
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item ativo">
+        <i class="fa-solid fa-table-cells-large"></i>
+        <span>Dashboard</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i class="fa-regular fa-circle-dot"></i>
+        <span>Metas</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i class="fa-regular fa-clock"></i>
+        <span>Sessões</span>
+      </a>
+    </nav>
+ 
+    <a href="#" class="sidebar-sair">
+      <i class="fa-solid fa-right-from-bracket"></i>
+      <span>Sair</span>
+    </a>
+  </aside>
+ 
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+ 
+    <!-- BANNER -->
+    <div class="banner">
+      <div class="banner-text">
+        <h1>Olá, Luyza</h1>
+        <p>Pronta(o) para continuar seus estudos hoje?</p>
+      </div>
+      <div class="banner-illustration">
+        <img src="../assets/images/imagemdashboard.png" alt="Ilustração" />
+      </div>
+    </div>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <div class="dashboard-grid">
+
+        <!-- COLUNA ESQUERDA -->
+         <div class="coluna-principal">
+
+            <!-- Metas recebtes-->
+             <section class="secao-titulo">
+                <h2>Metas Recentes</h2>
+                <div class="cards-grid">
+
+                    <div class="meta-card">
+                        <div class="meta-card-header">
+                            <span class="meta-card-titulo">Meta: Java</span>
+                            <i class="fa-regular fa-circle-dot icone-meta"></i>
+                        </div>
+                        <p class="meta-card-desc">Descrição: Programação</p>
+                        <p class="meta-card-progresso">Progresso: 60% concluído</p>
+                        <div class="barra-fundo">
+                            <div class="barra-preenchida" style="width: 60%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="meta-card">
+                        <div class="meta-card-header">
+                            <span class="meta-card-titulo">Meta: Banco de Dados</span>
+                            <i class="fa-regular fa-circle-dot icone-meta"></i>
+                        </div>
+                        <p class="meta-card-desc">Descrição: Administração de bancos de dados</p>
+                        <p class="meta-card-progresso">Progresso: 40% concluído</p>
+                        <div class="barra-fundo">
+                            <div class="barra-preenchida" style="width: 40%;"></div>
+                        </div>
+                    </div>
+
+                        <div class="meta-card">
+                            <div class="meta-card-header">
+                                <span class="meta-card-titulo">Meta: Eng. de Software</span>
+                                <i class="fa-regular fa-circle-dot icone-meta"></i>
+                            </div>
+                            <p class="meta-card-desc">Descrição: Desenvolvimento de software</p>
+                            <p class="meta-card-progresso">Progresso: 70% concluído</p>
+                            <div class="barra-fundo">
+                                <div class="barra-preenchida" style="width: 70%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sessões recentes -->
+                <section class="secao">
+                    <h2 class="secao-titulo">Sessões Recentes</h2>
+                    <div class="cards-grid">
+
+                        <div class="sessao-card">
+                            <div class="sessao-card-header">
+                                <span class="sessao-card-titulo">Meta: Java</span>
+                                <i class="fa-regular fa-circle-dot icone-sessao"></i>
+                            </div>
+                            <p class="sessao-card-info">Duração: 2h</p>
+                            <p class="sessao-card-info">Data: 20/06</p>
+                        </div>
+
+                        <div class="sessao-card">
+                            <div class="sessao-card-header">
+                                <span class="sessao-card-titulo">Meta: Banco de Dados</span>
+                                <i class="fa-regular fa-circle-dot icone-sessao"></i>
+                            </div>
+                            <p class="sessao-card-info">Duração: 1h30m</p>
+                            <p class="sessao-card-info">Data: 19/06</p>
+                        </div>
+
+                        <div class="sessao-card">
+                            <div class="sessao-card-header">
+                                <span class="sessao-card-titulo">Meta: Eng. de Software</span>
+                                <i class="fa-regular fa-circle-dot icone-sessao"></i>
+                            </div>
+                            <p class="sessao-card-info">Duração: 3h</p>
+                            <p class="sessao-card-info">Data: 18/06</p>
+                        </div>
+
+                    </div>
+                </section>
+
+                </div>
+
+                <!-- COLUNA DIREITA: Meta com prazo mais próximo -->
+                <aside class="coluna-lateral">
+                    <div class="progresso-card">
+                        <h3 class="progresso-titulo">Meta com Prazo Próximo</h3>
+
+                        <div class="progresso-meta-nome">
+                            <i class="fa-regular fa-circle-dot icone-meta"></i>
+                            <span>Meta: Java</span>
+                        </div>
+                        <p class="progresso-desc">Programação orientada a objetos</p>
+
+                        <div class="progresso-barra-grupo">
+                            <div class="progresso-topo">
+                                <span class="campo-label">Progresso:</span>
+                                <span class="porcentagem">60% concluído</span>
+                            </div>
+                            <div class="barra-fundo">
+                                <div class="barra-preenchida" style="width: 60%;"></div>
+                            </div>
+                            <span class="horas-texto">12h de 2ah estudadas</span>
+                        </div>
+                        <span class="badge em-andamento">Em andamento</span>
+                    </div>
+                </aside>
+         </div>
+
+  </main>
+
+  <!-- Script do menu (externo) -->
+  <script src="../assets/js/menu.js" defer></script>
+  
+</body>
+</html>

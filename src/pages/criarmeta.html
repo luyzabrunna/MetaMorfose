@@ -4,25 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Nova Meta - MetaMorfose</title>
-
-    <!-- Fontes e Ícones -->
-    <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/400.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/500.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/600.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/700.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-     <!-- CSS Padronizado -->
-     <link rel="stylesheet" href="../assets/css/criarmeta.css" />
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/400.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/500.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/600.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/700.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="../assets/css/criarmeta.css" />
 </head>
 <body>
 
   <!-- OVERLAY -->
-  <div class="overlay" id="overlay" onclick="fecharMenu()"></div>
+  <div class="overlay" id="overlay"></div>
 
   <!-- TOPBAR MOBILE -->
   <div class="topbar-mobile">
-    <button class="btn-hamburguer" id="btnHamburguer" onclick="abrirMenu()">
+    <img src="../assets/images/logo.1.png" alt="MetaMorfose" class="logo-mobile" />
+    <button class="btn-hamburguer" id="btnHamburguer">
       <i class="fa-solid fa-bars"></i>
     </button>
   </div>
@@ -31,7 +28,7 @@
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-logo">
       <img src="../assets/images/logo.1.png" alt="MetaMorfose" class="logo-img" />
-      <button class="btn-fechar-menu" onclick="fecharMenu()">
+      <button class="btn-fechar-menu" id="btnFecharSidebar">
         <i class="fa-solid fa-xmark"></i>
       </button>
     </div>
@@ -54,14 +51,10 @@
         <i class="fa-regular fa-clock"></i>
         <span>Sessões</span>
       </a>
-      <a href="#" class="nav-item">
-        <i class="fa-solid fa-chart-line"></i>
-        <span>Progresso</span>
-      </a>
     </nav>
 
     <a href="#" class="sidebar-sair">
-      <i class="fa-solid fa-location-pin"></i>
+      <i class="fa-solid fa-right-from-bracket"></i>
       <span>Sair</span>
     </a>
   </aside>
@@ -97,12 +90,12 @@
 
         <div class="form-group">
           <label for="horas">Horas totais</label>
-          <input type="number" id="horas" name="horas" />
+          <input type="time" id="horas" name="horas" />
         </div>
 
         <div class="form-group">
           <label for="prazo">Prazo</label>
-          <input type="date" id="prazo" name="prazo" placeholder="Selecionar data" />
+          <input type="date" id="prazo" name="prazo" />
         </div>
 
         <div class="form-actions">
@@ -114,16 +107,8 @@
 
   </main>
 
-  <script>
-    function abrirMenu() {
-      document.getElementById('sidebar').classList.add('aberto');
-      document.getElementById('overlay').classList.add('ativo');
-    }
-    function fecharMenu() {
-      document.getElementById('sidebar').classList.remove('aberto');
-      document.getElementById('overlay').classList.remove('ativo');
-    }
-  </script>
+  <!-- Script do menu (externo) -->
+  <script src="../assets/js/menu.js" defer></script>
 
 </body>
 </html>

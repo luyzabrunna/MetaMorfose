@@ -372,6 +372,14 @@ body {
   border-radius: 99px;
 }
 
+.barra-preenchida.gradiente-1 {
+  background: linear-gradient(90deg, var(--roxo-principal), var(--roxo-claro));
+}
+
+.barra-preenchida.gradiente-2 {
+  background: linear-gradient(90deg, var(--roxo-medio), var(--roxo-principal));
+}
+
 .horas-texto {
   display: block;
   margin-top: 6px;
@@ -494,8 +502,10 @@ body {
 }
 
 .sessao-horas {
-  font-size: 12px;
+  font-size: 11px;
   color: #666;
+  grid-column: 1;
+  grid-row: 1;
 }
 
 .sessao-barra-grupo {
