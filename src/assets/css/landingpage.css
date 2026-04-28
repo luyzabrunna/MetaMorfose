@@ -34,7 +34,7 @@ body {
 /* ── HEADER ── */
 .header-dark {
   background-color: var(--roxo-escuro);
-  padding: 15px 0;
+  padding: 5px;
 }
 
 .header-nav {
@@ -283,7 +283,7 @@ body {
 /* ── RODAPÉ ── */
 .footer-dark {
   background-color: var(--roxo-escuro);
-  padding: 40px 0;
+  padding: 20px ;
   text-align: center;
   color: var(--branco);
   font-size: 0.9rem;
