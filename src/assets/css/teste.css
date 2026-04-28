@@ -1,0 +1,165 @@
+/* =========================================
+   BASE & VARIÁVEIS
+   ========================================= */
+:root {
+  --roxo-escuro: #3a1e72;
+  --roxo-medio: #533989;
+  --roxo-principal: #8363c6;
+  --branco: #ffffff;
+  --cinza-leve: #e5e0eb;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: var(--roxo-escuro);
+  background: var(--branco);
+  line-height: 1.6;
+}
+
+img { max-width: 100%; display: block; }
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* =========================================
+   HEADER (APENAS LOGO)
+   ========================================= */
+.cabecalho {
+  background: var(--roxo-escuro);
+  padding: 14px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo { height: 40px; }
+
+/* =========================================
+   BANNERS (21:9 | SEM OVERLAY | TEXTO À ESQUERDA)
+   ========================================= */
+.banner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 21/9; /* Força o formato 21:9 da sua imagem */
+  min-height: 320px;  /* Garante altura mínima em mobile */
+  overflow: hidden;
+  display: flex;
+  align-items: center; /* Centraliza o bloco de texto verticalmente */
+}
+
+.banner-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Preenche o espaço sem distorcer a imagem 21:9 */
+  z-index: 0;
+}
+
+.banner-conteudo {
+  position: relative;
+  z-index: 2;
+  color: var(--branco);
+  max-width: 700px;
+  /* Texto alinhado à esquerda naturalmente pelo .container */
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35); /* Leve sombra só para leitura */
+}
+
+.banner-conteudo h1 { font-size: 3rem; font-weight: 800; line-height: 1.1; margin-bottom: 16px; }
+.banner-conteudo h2 { font-size: 2.4rem; font-weight: 700; line-height: 1.2; margin-bottom: 12px; }
+.banner-conteudo p  { font-size: 1.2rem; margin-bottom: 24px; opacity: 0.95; }
+
+/* =========================================
+   BOTÕES
+   ========================================= */
+.botoes { display: flex; gap: 16px; flex-wrap: wrap; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.25s;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.btn-primario {
+  background: var(--roxo-principal);
+  color: var(--branco);
+  border-color: var(--roxo-principal);
+}
+.btn-primario:hover { background: var(--roxo-medio); border-color: var(--roxo-medio); }
+
+.btn-secundario {
+  background: transparent;
+  color: var(--branco);
+  border-color: var(--branco);
+}
+.btn-secundario:hover { background: var(--branco); color: var(--roxo-escuro); }
+
+.btn-grande { padding: 16px 40px; font-size: 1.1rem; }
+
+/* =========================================
+   SEÇÕES PADRÃO & CARDS
+   ========================================= */
+.secao { padding: 80px 24px; text-align: center; }
+.titulo { font-size: 2rem; margin-bottom: 40px; color: var(--roxo-escuro); }
+
+.grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  background: var(--branco);
+  border: 1px solid var(--cinza-leve);
+  border-radius: 12px;
+  padding: 32px 24px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.card:hover { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(58, 30, 114, 0.1); }
+.card h3 { margin-bottom: 8px; color: var(--roxo-escuro); font-size: 1.25rem; }
+.card p { color: var(--roxo-medio); }
+
+.cta { padding: 60px 24px; text-align: center; }
+.cta h2 { font-size: 2rem; margin-bottom: 24px; }
+
+.rodape {
+  background: var(--roxo-escuro);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 24px 0;
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* =========================================
+   RESPONSIVIDADE
+   ========================================= */
+@media (max-width: 768px) {
+  .banner { aspect-ratio: 16/9; min-height: 280px; }
+  .banner-conteudo h1 { font-size: 2rem; }
+  .banner-conteudo h2 { font-size: 1.6rem; }
+  .banner-conteudo p  { font-size: 1rem; }
+  .botoes { flex-direction: column; }
+  .btn { width: 100%; }
+  .grid-cards { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+  .logo { height: 32px; }
+  .banner { min-height: 240px; }
+  .banner-conteudo h1 { font-size: 1.6rem; }
+  .banner-conteudo h2 { font-size: 1.3rem; }
+}
