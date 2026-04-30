@@ -602,3 +602,45 @@ body {
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(100, 60, 180, 0.12);
 }
+
+/* ── CARD TOTAL DE HORAS ── */
+.horas-card {
+  background-color: var(--branco);
+  border-radius: 16px;
+  padding: 22px 20px;
+  box-shadow: 0 2px 12px rgba(100,60,180,0.07);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  margin-top: 16px;
+}
+
+.horas-icone {
+  width: 52px;
+  height: 52px;
+  background-color: var(--roxo-fundo);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.horas-icone i {
+  font-size: 22px;
+  color: var(--roxo-principal);
+}
+
+.horas-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--texto-label);
+}
+
+.horas-valor {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--roxo-escuro);
+  line-height: 1;
+}
