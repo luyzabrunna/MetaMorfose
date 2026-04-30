@@ -1,6 +1,3 @@
-/* =========================================
-   RESET BÁSICO
-   ========================================= */
 * {
     margin: 0;
     padding: 0;
@@ -24,7 +21,7 @@ body {
 
 .left-panel {
     flex: 1;
-    background: #4B2C7A;
+    background: linear-gradient(to bottom, #3A1F72, #533989);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -145,7 +142,7 @@ body {
 
 .right-panel {
     flex: 1;
-    background: linear-gradient(160deg, #A380D8 0%, #B79EE4 40%, #C9B0F0 100%);
+    background: linear-gradient(to bottom, #8363C6, #BAA2EB);
     display: flex;
     flex-direction: column;
     justify-content: center;
