@@ -1,3 +1,14 @@
+<?php
+// Inicia a sessão para verificar o status de login do usuário
+session_start();
+
+// Se o usuário JÁ estiver logado, redireciona para o dashboard
+if (isset($_SESSION['usuario_id'])) {
+    header("Location: pages/dashboard.html");
+    exit;
+}
+// Se NÃO estiver logado, o código continua e exibe a página de landing abaixo
+?>
 <!-- ========================================
       - PÁGINA PRINCIPAL
      ======================================== -->
@@ -9,7 +20,8 @@
     <title>METAmorfose</title>
     
     <!-- Link para o arquivo CSS externo -->
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <!-- Ajuste o caminho conforme a estrutura final da pasta src -->
+    <link rel="stylesheet" href="assets/css/style.css">
     
     <!-- Fonte Google: Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -19,9 +31,8 @@
     <section class="hero">
         <!-- Fundo gradiente com efeitos visuais -->
         <div class="hero-bg"></div>
-        <img src="../assets/images/logo.1.png" alt="logo" class="logo-img">
+        <img src="assets/images/logo.1.png" alt="logo" class="logo-img">
         
-
         <div class="container hero-container">
             <!-- Conteúdo textual -->
             <div class="hero-content">
@@ -30,12 +41,11 @@
                 
                 <!-- Botões de ação -->
                 <div class="hero-buttons">
-                    <a href="../pages/login.html" class="btn btn-primary">Entrar</a>
-                    <a href="../pages/cadastro.html" class="btn btn-outline">Criar conta</a>
+                    <!-- Links ajustados para funcionar a partir da raiz src/ -->
+                    <a href="pages/login.html" class="btn btn-primary">Entrar</a>
+                    <a href="pages/cadastro.html" class="btn btn-outline">Criar conta</a>
                 </div>
             </div>
-
-           
         </div>
     </section>
 
@@ -90,7 +100,7 @@
     <!-- ===== VISÃO CLARA: Frase de impacto ===== -->
     <section class="visao-clara">
         <div class="container visao-container">
-            <h2 class="section-title visao-title">Uma visão clara das suas <strong>metas</strong>  e do seu <strong>progresso</strong> em um só lugar</h2>
+            <h2 class="section-title visao-title">Uma visão clara das suas <strong>metas</strong> e do seu <strong>progresso</strong> em um só lugar</h2>
             <p class="visao-subtitle">METAmorfose transforma metas em conquistas.</p>
         </div>
     </section>
@@ -99,7 +109,7 @@
     <section class="cta-final">
         <div class="container cta-container">
             <h2 class="cta-title">Comece agora a organizar seus estudos</h2>
-            <a href="../pages/cadastro.html" class="btn btn-cta">Criar conta</a>
+            <a href="pages/cadastro.html" class="btn btn-cta">Criar conta</a>
         </div>
     </section>
 
@@ -109,8 +119,5 @@
             <p class="footer-text">&copy; 2026 METAmorfose. Todos os direitos reservados.</p>
         </div>
     </footer>
-
-   
-
 </body>
 </html>
