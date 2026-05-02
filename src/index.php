@@ -42,8 +42,8 @@ if (isset($_SESSION['usuario_id'])) {
                 <!-- Botões de ação -->
                 <div class="hero-buttons">
                     <!-- Links ajustados para funcionar a partir da raiz src/ -->
-                    <a href="pages/login.html" class="btn btn-primary">Entrar</a>
-                    <a href="pages/cadastro.html" class="btn btn-outline">Criar conta</a>
+                    <a href="php/login.php" class="btn btn-primary">Entrar</a>
+                    <a href="php/cadastro.php" class="btn btn-outline">Criar conta</a>
                 </div>
             </div>
         </div>
