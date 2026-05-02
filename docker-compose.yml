@@ -1,32 +1,75 @@
 version: '3.8'
 
 services:
-  php:
-    image: php:8.2-apache
-    container_name: metamorfose-php
-    volumes:
-      - ./src:/var/www/html
+
+  # ── PHP + Apache ──
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: metamorfose_app
+
     ports:
       - "8080:80"
-    command: >
-      bash -c "docker-php-ext-install pdo pdo_mysql && apache2-foreground"
 
+    volumes:
+      - ./src:/var/www/html
+
+    depends_on:
+      - db
+
+    networks:
+      - metamorfose_net
+
+  # ── MySQL ──
   db:
     image: mysql:8.0
-    container_name: metamorfose-db
+
+    container_name: metamorfose_db
+
     restart: always
+
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: metamorfose
-    ports:
-      - "3306:3306"
+      MYSQL_USER: metamorfose_user
+      MYSQL_PASSWORD: metamorfose_pass
 
+    ports:
+      - "3307:3306"
+
+    volumes:
+      - db_data:/var/lib/mysql
+
+    networks:
+      - metamorfose_net
+
+  # ── phpMyAdmin ──
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: metamorfose-phpmyadmin
+
+    container_name: metamorfose_phpmyadmin
+
     restart: always
+
+    ports:
+      - "8082:80"
+
     environment:
       PMA_HOST: db
-      MYSQL_ROOT_PASSWORD: root
-    ports:
-      - "8081:80"
+      PMA_USER: root
+      PMA_PASSWORD: root
+
+    depends_on:
+      - db
+
+    networks:
+      - metamorfose_net
+
+volumes:
+  db_data:
+
+networks:
+  metamorfose_net:
+    driver: bridge
