@@ -32,23 +32,15 @@ class AuthController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Recebe dados do formulário
-            $nome = trim($_POST['nome'] ?? '');
-
-            $email = trim($_POST['email'] ?? '');
-
-            $senha = $_POST['senha'] ?? '';
-
-            $confirmar = $_POST['confirmar'] ?? '';
+            $nome      = trim($_POST['nome']      ?? '');
+            $email     = trim($_POST['email']     ?? '');
+            $senha     = $_POST['senha']           ?? '';
+            $confirmar = $_POST['confirmar']       ?? '';
 
             // VALIDAÇÕES
 
             // Campos vazios
-            if (
-                empty($nome) ||
-                empty($email) ||
-                empty($senha) ||
-                empty($confirmar)
-            ) {
+            if (empty($nome) || empty($email) || empty($senha) || empty($confirmar)) {
 
                 $erro = "Preencha todos os campos.";
 
@@ -57,7 +49,7 @@ class AuthController {
 
                 $erro = "E-mail inválido.";
 
-            //  Verifica tamanho mínimo da senha
+            // Verifica tamanho mínimo da senha
             } elseif (strlen($senha) < 6) {
 
                 $erro = "A senha deve ter pelo menos 6 caracteres.";
@@ -65,7 +57,9 @@ class AuthController {
             // Senhas diferentes
             } elseif ($senha !== $confirmar) {
 
-                $erro = "As senhas não coincidem.";
+                $_SESSION['erro'] = "As senhas não coincidem.";
+                header("Location: ../views/cadastro.php");
+                exit;
 
             // E-mail já existe
             } elseif ($this->model->findByEmail($email)) {
@@ -83,25 +77,21 @@ class AuthController {
                     $usuario = $this->model->findByEmail($email);
 
                     // Cria sessão
-                    $_SESSION['usuario_id'] = $usuario['id'];
-
+                    $_SESSION['usuario_id']   = $usuario['id'];
                     $_SESSION['usuario_nome'] = $usuario['nome'];
 
                     // Redireciona para dashboard
-                    header("Location: ../views/dashboard.php");
-
+                    header("Location: dashboard.php");
                     exit;
 
                 } else {
-                    
-                    // Caso ocorra erro no cadastro
+
                     $erro = "Erro ao criar conta. Tente novamente.";
                 }
             }
         }
+        return $erro;
 
-        // Carrega view de cadastro
-        require_once __DIR__ . '/../views/cadastro.php';
     }
 
     // LOGIN
@@ -111,11 +101,9 @@ class AuthController {
         // Variável de erro
         $erro = null;
 
-        // Se já estiver logado
+        // Se já estiver logado, redireciona direto
         if (isset($_SESSION['usuario_id'])) {
-
             header("Location: ../views/dashboard.php");
-
             exit;
         }
 
@@ -124,8 +112,7 @@ class AuthController {
 
             // Recebe dados
             $email = trim($_POST['email'] ?? '');
-
-            $senha = $_POST['senha'] ?? '';
+            $senha = $_POST['senha']       ?? '';
 
             // Campos vazios
             if (empty($email) || empty($senha)) {
@@ -134,67 +121,59 @@ class AuthController {
 
             } else {
 
-                // Busca usuário
+                // Busca usuário pelo e-mail
                 $usuario = $this->model->findByEmail($email);
 
-                // Verifica senha
-                if (
-                    $usuario &&
-                    password_verify($senha, $usuario['senha'])
-                ) {
+                // Verifica se existe e se a senha bate
+                if ($usuario && password_verify($senha, $usuario['senha'])) {
 
                     // Cria sessão
-                    $_SESSION['usuario_id'] = $usuario['id'];
-
+                    $_SESSION['usuario_id']   = $usuario['id'];
                     $_SESSION['usuario_nome'] = $usuario['nome'];
 
-                    // Redireciona
-                    header("Location: ../views/dashboard.php");
-
+                    // Redireciona para dashboard
+                    header("Location: dashboard.php");
                     exit;
 
                 } else {
 
-                    $erro = "E-mail ou senha incorretos.";
+                    $_SESSION['erro'] = "E-mail ou senha incorretos.";
+                    header("Location: ../views/login.php");
+                    exit;
                 }
             }
         }
-
-        // Carrega view login
-        require_once __DIR__ . '/../views/login.php';
+        return $erro;
     }
 
     // LOGOUT
-    
+
     public function logout() {
 
-        // Limpa sessão
+        // Limpa todos os dados da sessão
         $_SESSION = [];
 
-        // Destroi sessão
+        // Destroi a sessão
         session_destroy();
 
-        // Redireciona para login
-        header("Location: ../views/login.php");
-
+        // Redireciona para página inicial
+        header("Location: ../../index.php");
         exit;
     }
 
-    // VERIFICA LOGIN
+    // VERIFICA SE ESTÁ LOGADO
+    // (usar no topo das páginas protegidas)
 
     public static function verificar() {
 
         // Inicia sessão se necessário
         if (session_status() === PHP_SESSION_NONE) {
-
             session_start();
         }
 
-        // Verifica usuário logado
+        // Se não estiver logado, redireciona para login
         if (!isset($_SESSION['usuario_id'])) {
-
             header("Location: ../views/login.php");
-
             exit;
         }
     }
@@ -205,42 +184,13 @@ class AuthController {
 
         // Inicia sessão se necessário
         if (session_status() === PHP_SESSION_NONE) {
-
             session_start();
         }
 
-        // Retorna dados
+        // Retorna id e nome do usuário logado
         return [
-
-            'id' => $_SESSION['usuario_id'] ?? null,
-
-            'nome' => $_SESSION['usuario_nome'] ?? null
+            'id'   => $_SESSION['usuario_id']   ?? null,
+            'nome' => $_SESSION['usuario_nome'] ?? null,
         ];
     }
-}
-
-// EXECUÇÃO DAS AÇÕES
-
-// Cria controller
-$auth = new AuthController();
-
-// Pega ação da URL
-$acao = $_GET['acao'] ?? '';
-
-// Executa login
-if ($acao === 'login') {
-
-    $auth->login();
-}
-
-// Executa cadastro
-if ($acao === 'register') {
-
-    $auth->register();
-}
-
-// Executa logout
-if ($acao === 'logout') {
-
-    $auth->logout();
 }

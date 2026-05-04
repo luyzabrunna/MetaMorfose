@@ -1,12 +1,25 @@
 <?php
-// Inicia a sessão para gerenciar o login do usuário
-session_start();
 
-// Se o usuário JÁ estiver logado, redireciona para o dashboard
-if (isset($_SESSION['usuario_id'])) {
-    header("Location: dashboard.php");
-    exit;
+$erro = $_SESSION['erro'] ?? null;
+unset($_SESSION['erro']);
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Evita cache
+header("Cache-Control: no-cache, no-store, must-revalidate");
+header("Pragma: no-cache");
+header("Expires: 0");
+
+require_once __DIR__ . '/../controllers/AuthController.php';
+
+$auth = new AuthController();
+
+// Processa login
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $erro = $auth->login();
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -21,7 +34,7 @@ if (isset($_SESSION['usuario_id'])) {
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Arquivo de estilos externo -->
-    <link rel="stylesheet" href="../assets/css/login.css">
+    <link rel="stylesheet" href="../../assets/css/login.css">
 </head>
 <body>
     <!-- Container principal que divide a tela ao meio -->
@@ -35,12 +48,18 @@ if (isset($_SESSION['usuario_id'])) {
             <!-- Formulário de Login -->
             <!-- action: aponta para o script que vai validar os dados -->
             <!-- method: POST para enviar dados de forma segura -->
-            <form class="login-form" id="loginForm" action="auth_login.php" method="POST">
+             <?php if (!empty($erro)): ?>
+                <div class="erro-msg">
+                    <?php echo htmlspecialchars($erro); ?>
+                </div>
+             <?php endif; ?>
+            <form class="login-form" id="loginForm" method="POST">
                 
                 <!-- Campo de E-mail -->
                 <div class="form-group">
                     <label for="email">E-mail</label>
-                    <input type="email" id="email" name="email" placeholder="seu@email.com" required autocomplete="email">
+                    <input type="email" id="email" name="email" placeholder="seu@email.com" value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>" required
+                    autocomplete="email">
                 </div>
 
                 <!-- Campo de Senha COM toggle de visibilidade -->
@@ -87,7 +106,7 @@ if (isset($_SESSION['usuario_id'])) {
 
                 <!-- Imagem ilustrativa -->
                 <div class="illustration-container">
-                    <img src="../assets/images/imagemlogin.png" alt="Ilustração de planejamento de metas">
+                    <img src="../../assets/images/imagemlogin.png" alt="Ilustração de planejamento de metas">
                 </div>
             </div>
         </div>

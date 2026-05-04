@@ -1,15 +1,21 @@
 <?php
-// Inicia a sessão e protege a página
-session_start();
 
-// Se NÃO estiver logado, redireciona para o login
-if (!isset($_SESSION['usuario_id'])) {
-    header("Location: login.php");
-    exit;
-}
+header("Cache-Control: no-cache, no-store, must-revalidate");
+header("Pragma: no-cache");
+header("Expires: 0");
 
-// Recupera o nome do usuário da sessão (com fallback seguro)
-$nomeUsuario = $_SESSION['usuario_nome'] ?? 'Usuário';
+// Importa o controller de autenticação
+require_once __DIR__ . '/../controllers/AuthController.php';
+
+// Protege a página (só entra usuário logado)
+AuthController::verificar();
+
+// Recupera dados do usuário logado
+$usuario = AuthController::usuarioLogado();
+
+// Nome do usuário vindo da sessão
+$nomeUsuario = $usuario['nome'] ?? 'Usuário';
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -17,12 +23,18 @@ $nomeUsuario = $_SESSION['usuario_nome'] ?? 'Usuário';
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dashboard - MetaMorfose</title>
+
+  <!-- Fonte -->
   <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/400.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/500.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/600.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/700.css" rel="stylesheet">
+
+  <!-- Ícones -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link rel="stylesheet" href="../assets/css/dashboard.css" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../../assets/css/dashboard.css" />
 </head>
 <body>
 
@@ -31,7 +43,8 @@ $nomeUsuario = $_SESSION['usuario_nome'] ?? 'Usuário';
 
   <!-- TOPBAR MOBILE -->
   <div class="topbar-mobile">
-    <img src="../assets/images/logo.1.png" alt="MetaMorfose" class="logo-mobile" />
+    <img src="../../assets/images/logo.1.png" alt="MetaMorfose" class="logo-mobile" />
+
     <button class="btn-hamburguer" id="btnHamburguer">
       <i class="fa-solid fa-bars"></i>
     </button>
@@ -39,184 +52,318 @@ $nomeUsuario = $_SESSION['usuario_nome'] ?? 'Usuário';
 
   <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
+
     <div class="sidebar-logo">
-      <img src="../assets/images/logo.1.png" alt="MetaMorfose" class="logo-img" />
+      <img src="../../assets/images/logo.1.png" alt="MetaMorfose" class="logo-img" />
+
       <button class="btn-fechar-menu" id="btnFecharSidebar">
         <i class="fa-solid fa-xmark"></i>
       </button>
     </div>
 
+    <!-- Criar nova meta -->
     <div class="sidebar-criar">
       <span>Criar<br>nova meta</span>
-      <button class="btn-plus" onclick="window.location.href='criarmeta.html'"><i class="fa-solid fa-plus"></i></button>
+
+      <!-- depois isso vira create-meta.php -->
+      <button class="btn-plus" onclick="window.location.href='criarmeta.html'">
+        <i class="fa-solid fa-plus"></i>
+      </button>
     </div>
 
+    <!-- Menu -->
     <nav class="sidebar-nav">
+
       <a href="dashboard.php" class="nav-item ativo">
         <i class="fa-solid fa-table-cells-large"></i>
         <span>Dashboard</span>
       </a>
+
       <a href="visualizacaometas.html" class="nav-item">
         <i class="fa-regular fa-circle-dot"></i>
         <span>Metas</span>
       </a>
+
       <a href="visualizacaosessao.html" class="nav-item">
         <i class="fa-regular fa-clock"></i>
         <span>Sessões</span>
       </a>
+
     </nav>
 
-    <!-- Link de Logout apontando para o script de logout -->
-    <a href="logout.php" class="sidebar-sair">
+    <!-- Logout -->
+    <a href="../controllers/logout.php" class="sidebar-sair">
       <i class="fa-solid fa-right-from-bracket"></i>
       <span>Sair</span>
     </a>
+
   </aside>
 
-  <!-- MAIN CONTENT -->
+  <!-- MAIN -->
   <main class="main-content">
 
-    <!-- BANNER -->
+    <!-- Banner -->
     <div class="banner">
+
       <div class="banner-text">
-        <!-- Nome dinâmico vindo da sessão PHP -->
-        <h1>Olá, <?php echo htmlspecialchars($nomeUsuario); ?> 👋</h1>
-        <p>Pronta(o) para continuar seus estudos hoje?</p>
+
+        <!-- Nome vindo da sessão -->
+        <h1>
+          Olá, <?php echo htmlspecialchars($nomeUsuario); ?> 👋
+        </h1>
+
+        <p>
+          Pronta(o) para continuar seus estudos hoje?
+        </p>
+
       </div>
+
       <div class="banner-illustration">
-        <img src="../assets/images/imagemdashboard.png" alt="Ilustração" />
+        <img src="../../assets/images/imagemdashboard.png" alt="Ilustração" />
       </div>
+
     </div>
 
-    <!-- CONTEÚDO PRINCIPAL -->
+    <!-- GRID -->
     <div class="dashboard-grid">
 
       <!-- COLUNA ESQUERDA -->
       <div class="coluna-principal">
 
-        <!-- Metas recentes -->
+        <!-- METAS -->
         <section class="secao">
-          <h2 class="secao-titulo">Metas recentes</h2>
+
+          <h2 class="secao-titulo">
+            Metas recentes
+          </h2>
+
           <div class="cards-grid">
 
+            <!-- CARD -->
             <div class="meta-card" onclick="window.location.href='detalhemeta.html'" style="cursor:pointer;">
+
               <div class="meta-card-header">
                 <span class="meta-card-titulo">Meta: Java</span>
+
                 <i class="fa-regular fa-circle-dot icone-meta"></i>
               </div>
-              <p class="meta-card-desc">Descrição: Programação</p>
-              <p class="meta-card-progresso-texto">Progresso: 60% concluído</p>
+
+              <p class="meta-card-desc">
+                Descrição: Programação
+              </p>
+
+              <p class="meta-card-progresso-texto">
+                Progresso: 60% concluído
+              </p>
+
               <div class="barra-fundo">
                 <div class="barra-preenchida" style="width: 60%"></div>
               </div>
+
             </div>
 
+            <!-- CARD -->
             <div class="meta-card" onclick="window.location.href='detalhemeta.html'" style="cursor:pointer;">
+
               <div class="meta-card-header">
                 <span class="meta-card-titulo">Meta: Banco de Dados</span>
+
                 <i class="fa-regular fa-circle-dot icone-meta"></i>
               </div>
-              <p class="meta-card-desc">Descrição: Programação</p>
-              <p class="meta-card-progresso-texto">Progresso: 60% concluído</p>
+
+              <p class="meta-card-desc">
+                Descrição: Programação
+              </p>
+
+              <p class="meta-card-progresso-texto">
+                Progresso: 60% concluído
+              </p>
+
               <div class="barra-fundo">
                 <div class="barra-preenchida" style="width: 60%"></div>
               </div>
+
             </div>
 
+            <!-- CARD -->
             <div class="meta-card" onclick="window.location.href='detalhemeta.html'" style="cursor:pointer;">
+
               <div class="meta-card-header">
                 <span class="meta-card-titulo">Meta: Eng. de Software</span>
+
                 <i class="fa-regular fa-circle-dot icone-meta"></i>
               </div>
-              <p class="meta-card-desc">Descrição: Programação</p>
-              <p class="meta-card-progresso-texto">Progresso: 60% concluído</p>
+
+              <p class="meta-card-desc">
+                Descrição: Programação
+              </p>
+
+              <p class="meta-card-progresso-texto">
+                Progresso: 60% concluído
+              </p>
+
               <div class="barra-fundo">
                 <div class="barra-preenchida" style="width: 60%"></div>
               </div>
+
             </div>
 
           </div>
+
         </section>
 
-        <!-- Sessões recentes -->
+        <!-- SESSÕES -->
         <section class="secao">
-          <h2 class="secao-titulo">Sessões recentes</h2>
+
+          <h2 class="secao-titulo">
+            Sessões recentes
+          </h2>
+
           <div class="cards-grid">
 
             <div class="sessao-card" onclick="window.location.href='visualizacaosessao.html'" style="cursor:pointer;">
+
               <div class="sessao-card-header">
                 <span class="sessao-card-titulo">Meta: Java</span>
+
                 <i class="fa-regular fa-clock icone-sessao"></i>
               </div>
-              <p class="sessao-card-info">Duração: 2h</p>
-              <p class="sessao-card-info">Data: 16/03</p>
+
+              <p class="sessao-card-info">
+                Duração: 2h
+              </p>
+
+              <p class="sessao-card-info">
+                Data: 16/03
+              </p>
+
             </div>
 
             <div class="sessao-card" onclick="window.location.href='visualizacaosessao.html'" style="cursor:pointer;">
+
               <div class="sessao-card-header">
                 <span class="sessao-card-titulo">Meta: Banco de Dados</span>
+
                 <i class="fa-regular fa-clock icone-sessao"></i>
               </div>
-              <p class="sessao-card-info">Duração: 1h30</p>
-              <p class="sessao-card-info">Data: 15/03</p>
+
+              <p class="sessao-card-info">
+                Duração: 1h30
+              </p>
+
+              <p class="sessao-card-info">
+                Data: 15/03
+              </p>
+
             </div>
 
             <div class="sessao-card" onclick="window.location.href='visualizacaosessao.html'" style="cursor:pointer;">
+
               <div class="sessao-card-header">
                 <span class="sessao-card-titulo">Meta: Engenharia de Software</span>
+
                 <i class="fa-regular fa-clock icone-sessao"></i>
               </div>
-              <p class="sessao-card-info">Duração: 3h</p>
-              <p class="sessao-card-info">Data: 14/03</p>
+
+              <p class="sessao-card-info">
+                Duração: 3h
+              </p>
+
+              <p class="sessao-card-info">
+                Data: 14/03
+              </p>
+
             </div>
 
           </div>
+
         </section>
 
       </div>
 
-      <!-- COLUNA DIREITA: Meta com prazo mais próximo -->
+      <!-- COLUNA DIREITA -->
       <aside class="coluna-lateral">
+
+        <!-- CARD PRAZO -->
         <div class="progresso-card">
-          <h3 class="progresso-titulo">Prazo mais próximo</h3>
+
+          <h3 class="progresso-titulo">
+            Prazo mais próximo
+          </h3>
 
           <div class="progresso-meta-nome">
+
             <i class="fa-regular fa-circle-dot icone-meta"></i>
-            <span>Meta: Java</span>
+
+            <span>
+              Meta: Java
+            </span>
+
           </div>
 
-          <p class="progresso-prazo">Prazo: <strong>30/04/2026</strong></p>
-          <p class="progresso-desc">Programação orientada a objetos</p>
+          <p class="progresso-prazo">
+            Prazo: <strong>30/04/2026</strong>
+          </p>
+
+          <p class="progresso-desc">
+            Programação orientada a objetos
+          </p>
 
           <div class="progresso-barra-grupo">
+
             <div class="progresso-topo">
-              <span class="campo-label">Progresso</span>
-              <span class="porcentagem">60%</span>
+
+              <span class="campo-label">
+                Progresso
+              </span>
+
+              <span class="porcentagem">
+                60%
+              </span>
+
             </div>
+
             <div class="barra-fundo">
               <div class="barra-preenchida" style="width: 60%"></div>
             </div>
-            <span class="horas-texto">12h de 20h estudadas</span>
+
+            <span class="horas-texto">
+              12h de 20h estudadas
+            </span>
+
           </div>
 
-          <span class="badge em-andamento">Em andamento</span>
+          <span class="badge em-andamento">
+            Em andamento
+          </span>
+
         </div>
 
+        <!-- CARD HORAS -->
         <div class="horas-card">
+
           <div class="horas-icone">
             <i class="fa-regular fa-clock"></i>
           </div>
-          <p class="horas-label">Total de horas estudadas</p>
-          <p class="horas-valor">42h</p>
+
+          <p class="horas-label">
+            Total de horas estudadas
+          </p>
+
+          <p class="horas-valor">
+            42h
+          </p>
+
         </div>
+
       </aside>
 
     </div>
 
   </main>
 
-  <!-- Script do menu (externo) -->
-  <script src="../assets/js/menu.js" defer></script>
+  <!-- JS -->
+  <script src="../../assets/js/menu.js" defer></script>
 
 </body>
 </html>

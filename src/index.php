@@ -1,123 +1,247 @@
 <?php
-// Inicia a sessão para verificar o status de login do usuário
+// Inicia sessão
 session_start();
 
-// Se o usuário JÁ estiver logado, redireciona para o dashboard
+// Se usuário já estiver logado,
+// redireciona para dashboard
 if (isset($_SESSION['usuario_id'])) {
-    header("Location: pages/dashboard.html");
+
+    header("Location: app/views/dashboard.php");
+
     exit;
 }
-// Se NÃO estiver logado, o código continua e exibe a página de landing abaixo
 ?>
+
 <!-- ========================================
-      - PÁGINA PRINCIPAL
-     ======================================== -->
+      PÁGINA PRINCIPAL
+======================================== -->
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>METAmorfose</title>
-    
-    <!-- Link para o arquivo CSS externo -->
-    <!-- Ajuste o caminho conforme a estrutura final da pasta src -->
+
+    <!-- CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
-    
-    <!-- Fonte Google: Inter -->
+
+    <!-- Fonte -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 </head>
+
 <body>
-    <!-- ===== HERO: Seção principal com chamada para ação ===== -->
+
+    <!-- HERO -->
     <section class="hero">
-        <!-- Fundo gradiente com efeitos visuais -->
+
+        <!-- Fundo -->
         <div class="hero-bg"></div>
-        <img src="assets/images/logo.1.png" alt="logo" class="logo-img">
-        
+
+        <!-- Logo -->
+        <img
+            src="assets/images/logo.1.png"
+            alt="Logo METAmorfose"
+            class="logo-img"
+        >
+
         <div class="container hero-container">
-            <!-- Conteúdo textual -->
+
+            <!-- Conteúdo -->
             <div class="hero-content">
-                <h1 class="hero-title">Transforme suas metas de estudos em conquistas reais.</h1>
-                <p class="hero-subtitle">Organize seus objetivos, registre sessões de estudo e acompanhe sua evolução de forma clara e motivadora.</p>
-                
-                <!-- Botões de ação -->
+
+                <h1 class="hero-title">
+                    Transforme suas metas de estudos em conquistas reais.
+                </h1>
+
+                <p class="hero-subtitle">
+                    Organize seus objetivos, registre sessões de estudo e acompanhe sua evolução de forma clara e motivadora.
+                </p>
+
+                <!-- Botões -->
                 <div class="hero-buttons">
-                    <!-- Links ajustados para funcionar a partir da raiz src/ -->
-                    <a href="php/login.php" class="btn btn-primary">Entrar</a>
-                    <a href="php/cadastro.php" class="btn btn-outline">Criar conta</a>
+
+                    <!-- LOGIN -->
+                    <a
+                        href="app/views/login.php"
+                        class="btn btn-primary"
+                    >
+                        Entrar
+                    </a>
+
+                    <!-- CADASTRO -->
+                    <a
+                        href="app/views/cadastro.php"
+                        class="btn btn-outline"
+                    >
+                        Criar conta
+                    </a>
+
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== COMO FUNCIONA: Três cards explicativos ===== -->
+    <!-- COMO FUNCIONA -->
     <section class="como-funciona">
+
         <div class="container">
-            <h2 class="section-title">Como funciona</h2>
-            
+
+            <h2 class="section-title">
+                Como funciona
+            </h2>
+
             <div class="cards-grid">
-                <!-- Card 1: Definir metas -->
+
+                <!-- CARD 1 -->
                 <div class="card">
+
                     <div class="card-icon">
+
                         <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+
                             <rect width="36" height="36" rx="8" fill="#EDE9FE"/>
-                            <path d="M11 18L15.5 22.5L25 13" stroke="#7C3AED" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+                            <path
+                                d="M11 18L15.5 22.5L25 13"
+                                stroke="#7C3AED"
+                                stroke-width="2.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
                         </svg>
                     </div>
-                    <h3 class="card-title">Defina suas metas</h3>
-                    <p class="card-desc">Estabeleça objetivos de estudo claros e alcançáveis para cada matéria.</p>
+
+                    <h3 class="card-title">
+                        Defina suas metas
+                    </h3>
+
+                    <p class="card-desc">
+                        Estabeleça objetivos de estudo claros e alcançáveis para cada matéria.
+                    </p>
                 </div>
 
-                <!-- Card 2: Registrar sessões -->
+                <!-- CARD 2 -->
                 <div class="card">
+
                     <div class="card-icon">
+
                         <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+
                             <rect width="36" height="36" rx="8" fill="#EDE9FE"/>
-                            <circle cx="18" cy="18" r="5" stroke="#7C3AED" stroke-width="2"/>
-                            <path d="M18 9V13M18 23V27M9 18H13M23 18H27" stroke="#7C3AED" stroke-width="1.5" stroke-linecap="round"/>
+
+                            <circle
+                                cx="18"
+                                cy="18"
+                                r="5"
+                                stroke="#7C3AED"
+                                stroke-width="2"
+                            />
+
+                            <path
+                                d="M18 9V13M18 23V27M9 18H13M23 18H27"
+                                stroke="#7C3AED"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                            />
                         </svg>
                     </div>
-                    <h3 class="card-title">Registre suas sessões</h3>
-                    <p class="card-desc">Acompanhe o tempo dedicado e o progresso em cada área do conhecimento.</p>
+
+                    <h3 class="card-title">
+                        Registre suas sessões
+                    </h3>
+
+                    <p class="card-desc">
+                        Acompanhe o tempo dedicado e o progresso em cada área do conhecimento.
+                    </p>
                 </div>
 
-                <!-- Card 3: Ver evolução -->
+                <!-- CARD 3 -->
                 <div class="card">
+
                     <div class="card-icon">
+
                         <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+
                             <rect width="36" height="36" rx="8" fill="#EDE9FE"/>
+
                             <rect x="10" y="19" width="4" height="9" rx="1" fill="#7C3AED"/>
+
                             <rect x="16" y="13" width="4" height="15" rx="1" fill="#7C3AED"/>
+
                             <rect x="22" y="8" width="4" height="20" rx="1" fill="#7C3AED"/>
                         </svg>
                     </div>
-                    <h3 class="card-title">Veja sua evolução</h3>
-                    <p class="card-desc">Visualize gráficos e estatísticas para manter a motivação.</p>
+
+                    <h3 class="card-title">
+                        Veja sua evolução
+                    </h3>
+
+                    <p class="card-desc">
+                        Visualize gráficos e estatísticas para manter a motivação.
+                    </p>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- ===== VISÃO CLARA: Frase de impacto ===== -->
+    <!-- VISÃO -->
     <section class="visao-clara">
+
         <div class="container visao-container">
-            <h2 class="section-title visao-title">Uma visão clara das suas <strong>metas</strong> e do seu <strong>progresso</strong> em um só lugar</h2>
-            <p class="visao-subtitle">METAmorfose transforma metas em conquistas.</p>
+
+            <h2 class="section-title visao-title">
+
+                Uma visão clara das suas
+                <strong>metas</strong>
+                e do seu
+                <strong>progresso</strong>
+                em um só lugar
+
+            </h2>
+
+            <p class="visao-subtitle">
+                METAmorfose transforma metas em conquistas.
+            </p>
+
         </div>
     </section>
 
-    <!-- ===== CTA FINAL: Chamada para ação final ===== -->
+    <!-- CTA -->
     <section class="cta-final">
+
         <div class="container cta-container">
-            <h2 class="cta-title">Comece agora a organizar seus estudos</h2>
-            <a href="pages/cadastro.html" class="btn btn-cta">Criar conta</a>
+
+            <h2 class="cta-title">
+                Comece agora a organizar seus estudos
+            </h2>
+
+            <a
+                href="app/views/cadastro.php"
+                class="btn btn-cta"
+            >
+                Criar conta
+            </a>
+
         </div>
     </section>
 
-    <!-- ===== FOOTER: Rodapé com copyright ===== -->
+    <!-- FOOTER -->
     <footer class="footer">
+
         <div class="container">
-            <p class="footer-text">&copy; 2026 METAmorfose. Todos os direitos reservados.</p>
+
+            <p class="footer-text">
+                &copy; 2026 METAmorfose. Todos os direitos reservados.
+            </p>
+
         </div>
     </footer>
+
 </body>
 </html>

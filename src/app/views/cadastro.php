@@ -1,24 +1,38 @@
 <?php
-// Inicia a sessão para verificar se o usuário já está logado
-session_start();
 
-// Se já estiver logado, redireciona para o dashboard
-if (isset($_SESSION['usuario_id'])) {
-    header("Location: dashboard.html");
-    exit;
+$erro = $_SESSION['erro'] ?? null;
+unset($_SESSION['erro']);
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Evita cache
+header("Cache-Control: no-cache, no-store, must-revalidate");
+header("Pragma: no-cache");
+header("Expires: 0");
+
+require_once __DIR__ . '/../controllers/AuthController.php';
+
+$auth = new AuthController();
+
+// Processa formulário
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $erro = $auth->register();
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MetaMoforse - Criar Conta</title>
+    <title>MetaMorfose - Criar Conta</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/cadastro.css">
+    <link rel="stylesheet" href="../../assets/css/cadastro.css">
 </head>
 <body>
     <div class="container">
+
         <!-- LADO ESQUERDO -->
         <div class="left">
             <div class="left-text">
@@ -26,31 +40,49 @@ if (isset($_SESSION['usuario_id'])) {
                 <p class="left-sub">Organize seus estudos com facilidade</p>
             </div>
             <div class="left-illustration">
-                <img src="../assets/images/cadastro.png" alt="Ilustração cadastro">
+                <img src="../../assets/images/cadastro.png" alt="Ilustração cadastro">
             </div>
         </div>
-        
+
         <!-- LADO DIREITO -->
         <div class="right">
+
             <!-- Logo para mobile/tablet -->
             <div class="mobile-logo">
-                <img src="../assets/images/logo.png" alt="MetaMoforse">
-             </div>
+                <img src="../../assets/images/logo.png" alt="MetaMorfose">
+            </div>
+
             <div class="form-box">
                 <h2 class="form-title">Criar conta</h2>
                 <p class="form-sub">Cadastre-se para começar</p>
 
-                <!-- Formulário apontando para o script de processamento -->
-                <form action="auth_cadastro.php" method="POST">
-                    
+                <!-- Exibe mensagem de erro se houver -->
+                <?php if (!empty($erro)): ?>
+                    <div class="erro-msg"><?php echo htmlspecialchars($erro); ?></div>
+                <?php endif; ?>
+
+                <form method="POST">
+
                     <div class="field">
                         <label for="nome">Nome</label>
-                        <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required>
+                        <input
+                            type="text"
+                            id="nome"
+                            name="nome"
+                            placeholder="Seu nome completo"
+                            value="<?php echo htmlspecialchars($_POST['nome'] ?? ''); ?>"
+                            required>
                     </div>
 
                     <div class="field">
                         <label for="email">E-mail</label>
-                        <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="seu@email.com"
+                            value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>"
+                            required>
                     </div>
 
                     <div class="field">
@@ -90,28 +122,11 @@ if (isset($_SESSION['usuario_id'])) {
                     <button type="submit" class="btn-criar">Criar Conta</button>
                 </form>
 
-                <p class="login-link">Já tem uma conta? <a href="login.php">Entrar</a></p>
+                <p class="login-link">Já tem uma conta? <a href="../views/login.php">Entrar</a></p>
             </div>
         </div>
     </div>
 
-    <!-- Script do toggle de senha (mantido igual) -->
-    <script>
-        function toggleSenha(inputId, btn) {
-            const input = document.getElementById(inputId);
-            const aberto = btn.querySelector('.icone-olho');
-            const fechado = btn.querySelector('.icone-olho-fechado');
-
-            if (input.type === 'password') {
-                input.type = 'text';
-                aberto.classList.add('oculto');
-                fechado.classList.remove('oculto');
-            } else {
-                input.type = 'password';
-                aberto.classList.remove('oculto');
-                fechado.classList.add('oculto');
-            }
-        }
-    </script>
+    <script src="../../assets/js/cadastro.js"></script>
 </body>
 </html>
