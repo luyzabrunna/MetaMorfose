@@ -7,13 +7,12 @@ header("Expires: 0");
 // Importa o controller de autenticação
 require_once __DIR__ . '/../controllers/AuthController.php';
 
-// Protege a página (só entra usuário logado)
+// Protege a página
 AuthController::verificar();
 
-// Recupera dados do usuário logado
+// Dados do usuário logado
 $usuario = AuthController::usuarioLogado();
 
-// Nome do usuário vindo da sessão
 $nomeUsuario = $usuario['nome'] ?? 'Usuário';
 
 ?>
@@ -66,7 +65,7 @@ $nomeUsuario = $usuario['nome'] ?? 'Usuário';
       <span>Criar<br>nova meta</span>
 
       <!-- depois isso vira create-meta.php -->
-      <button class="btn-plus" onclick="window.location.href='criarmeta.html'">
+      <button class="btn-plus" onclick="window.location.href='criarmeta.php'">
         <i class="fa-solid fa-plus"></i>
       </button>
     </div>
@@ -79,12 +78,12 @@ $nomeUsuario = $usuario['nome'] ?? 'Usuário';
         <span>Dashboard</span>
       </a>
 
-      <a href="visualizacaometas.html" class="nav-item">
+      <a href="visualizacaometas.php" class="nav-item">
         <i class="fa-regular fa-circle-dot"></i>
         <span>Metas</span>
       </a>
 
-      <a href="visualizacaosessao.html" class="nav-item">
+      <a href="visualizacaosessao.php" class="nav-item">
         <i class="fa-regular fa-clock"></i>
         <span>Sessões</span>
       </a>
@@ -140,7 +139,7 @@ $nomeUsuario = $usuario['nome'] ?? 'Usuário';
           <div class="cards-grid">
 
             <!-- CARD -->
-            <div class="meta-card" onclick="window.location.href='detalhemeta.html'" style="cursor:pointer;">
+            <div class="meta-card" onclick="window.location.href='detalhemeta.php'" style="cursor:pointer;">
 
               <div class="meta-card-header">
                 <span class="meta-card-titulo">Meta: Java</span>
@@ -163,7 +162,7 @@ $nomeUsuario = $usuario['nome'] ?? 'Usuário';
             </div>
 
             <!-- CARD -->
-            <div class="meta-card" onclick="window.location.href='detalhemeta.html'" style="cursor:pointer;">
+            <div class="meta-card" onclick="window.location.href='detalhemeta.php'" style="cursor:pointer;">
 
               <div class="meta-card-header">
                 <span class="meta-card-titulo">Meta: Banco de Dados</span>
@@ -186,7 +185,7 @@ $nomeUsuario = $usuario['nome'] ?? 'Usuário';
             </div>
 
             <!-- CARD -->
-            <div class="meta-card" onclick="window.location.href='detalhemeta.html'" style="cursor:pointer;">
+            <div class="meta-card" onclick="window.location.href='detalhemeta.php'" style="cursor:pointer;">
 
               <div class="meta-card-header">
                 <span class="meta-card-titulo">Meta: Eng. de Software</span>
@@ -221,7 +220,7 @@ $nomeUsuario = $usuario['nome'] ?? 'Usuário';
 
           <div class="cards-grid">
 
-            <div class="sessao-card" onclick="window.location.href='visualizacaosessao.html'" style="cursor:pointer;">
+            <div class="sessao-card" onclick="window.location.href='visualizacaosessao.php'" style="cursor:pointer;">
 
               <div class="sessao-card-header">
                 <span class="sessao-card-titulo">Meta: Java</span>
@@ -239,7 +238,7 @@ $nomeUsuario = $usuario['nome'] ?? 'Usuário';
 
             </div>
 
-            <div class="sessao-card" onclick="window.location.href='visualizacaosessao.html'" style="cursor:pointer;">
+            <div class="sessao-card" onclick="window.location.href='visualizacaosessao.php'" style="cursor:pointer;">
 
               <div class="sessao-card-header">
                 <span class="sessao-card-titulo">Meta: Banco de Dados</span>
@@ -257,7 +256,7 @@ $nomeUsuario = $usuario['nome'] ?? 'Usuário';
 
             </div>
 
-            <div class="sessao-card" onclick="window.location.href='visualizacaosessao.html'" style="cursor:pointer;">
+            <div class="sessao-card" onclick="window.location.href='visualizacaosessao.php'" style="cursor:pointer;">
 
               <div class="sessao-card-header">
                 <span class="sessao-card-titulo">Meta: Engenharia de Software</span>
