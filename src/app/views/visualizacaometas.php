@@ -31,7 +31,7 @@ $usuario = AuthController::usuarioLogado();
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-  <link rel="stylesheet" href="../assets/css/visualizacaometas.css" />
+  <link rel="stylesheet" href="../../assets/css/visualizacaometas.css" />
 
 </head>
 
@@ -44,7 +44,7 @@ $usuario = AuthController::usuarioLogado();
   <div class="topbar-mobile">
 
     <img
-      src="../assets/images/logo.1.png"
+      src="../../assets/images/logo.1.png"
       alt="MetaMorfose"
       class="logo-mobile"
     />
@@ -61,7 +61,7 @@ $usuario = AuthController::usuarioLogado();
     <div class="sidebar-logo">
 
       <img
-        src="../assets/images/logo.1.png"
+        src="../../assets/images/logo.1.png"
         alt="MetaMorfose"
         class="logo-img"
       />
@@ -126,7 +126,7 @@ $usuario = AuthController::usuarioLogado();
 
       <div class="banner-illustration">
         <img
-          src="../assets/images/imagemvisualizacaometas.png"
+          src="../../assets/images/imagemvisualizacaometas.png"
           alt="Ilustração"
         />
       </div>
@@ -135,6 +135,111 @@ $usuario = AuthController::usuarioLogado();
 
     <!-- GRID DE METAS -->
     <div class="metas-grid">
+
+      <!-- META -->
+      <div
+        class="meta-card"
+        onclick="window.location.href='detalhemeta.php'"
+        style="cursor:pointer;">
+
+        <div class="meta-header">
+
+          <span class="meta-titulo">Estudar Java</span>
+
+          <span class="meta-prazo">
+            até 30/04
+            <i class="fa-regular fa-clock"></i>
+          </span>
+
+        </div>
+
+        <div class="meta-progresso">
+
+          <div class="barra-fundo">
+            <div class="barra-preenchida" style="width: 60%"></div>
+          </div>
+
+          <span class="meta-porcentagem">60%</span>
+
+        </div>
+
+        <p class="meta-horas">12h de 20h</p>
+
+        <span class="meta-status em-andamento">
+          Em andamento
+        </span>
+
+      </div>
+
+      <!-- META -->
+      <div
+        class="meta-card"
+        onclick="window.location.href='detalhemeta.php'"
+        style="cursor:pointer;">
+
+        <div class="meta-header">
+
+          <span class="meta-titulo">Banco de Dados</span>
+
+          <span class="meta-prazo">
+            até 12/05
+            <i class="fa-regular fa-clock"></i>
+          </span>
+
+        </div>
+
+        <div class="meta-progresso">
+
+          <div class="barra-fundo">
+            <div class="barra-preenchida" style="width: 45%"></div>
+          </div>
+
+          <span class="meta-porcentagem">45%</span>
+
+        </div>
+
+        <p class="meta-horas">9h de 20h</p>
+
+        <span class="meta-status em-andamento">
+          Em andamento
+        </span>
+
+      </div>
+
+       <!-- META -->
+      <div
+        class="meta-card"
+        onclick="window.location.href='detalhemeta.php'"
+        style="cursor:pointer;">
+
+        <div class="meta-header">
+
+          <span class="meta-titulo">Engenharia de Software</span>
+
+          <span class="meta-prazo">
+            até 12/05
+            <i class="fa-regular fa-clock"></i>
+          </span>
+
+        </div>
+
+        <div class="meta-progresso">
+
+          <div class="barra-fundo">
+            <div class="barra-preenchida" style="width: 45%"></div>
+          </div>
+
+          <span class="meta-porcentagem">45%</span>
+
+        </div>
+
+        <p class="meta-horas">18h de 20h</p>
+
+        <span class="meta-status em-andamento">
+          Em andamento
+        </span>
+
+      </div>
 
       <!-- META -->
       <div
@@ -217,7 +322,7 @@ $usuario = AuthController::usuarioLogado();
           <span class="meta-titulo">Engenharia de Software</span>
 
           <span class="meta-prazo">
-            até 18/05
+            até 12/05
             <i class="fa-regular fa-clock"></i>
           </span>
 
@@ -226,26 +331,27 @@ $usuario = AuthController::usuarioLogado();
         <div class="meta-progresso">
 
           <div class="barra-fundo">
-            <div class="barra-preenchida" style="width: 80%"></div>
+            <div class="barra-preenchida" style="width: 45%"></div>
           </div>
 
-          <span class="meta-porcentagem">80%</span>
+          <span class="meta-porcentagem">45%</span>
 
         </div>
 
-        <p class="meta-horas">16h de 20h</p>
+        <p class="meta-horas">18h de 20h</p>
 
-        <span class="meta-status quase-finalizada">
-          Quase finalizada
+        <span class="meta-status em-andamento">
+          Em andamento
         </span>
 
       </div>
+
 
     </div>
 
   </main>
 
-  <script src="../assets/js/menu.js" defer></script>
+  <script src="../../assets/js/menu.js" defer></script>
 
 </body>
 </html>

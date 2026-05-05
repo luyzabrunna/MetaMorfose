@@ -31,7 +31,7 @@ $usuario = AuthController::usuarioLogado();
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-  <link rel="stylesheet" href="../assets/css/criarmeta.css" />
+  <link rel="stylesheet" href="../../assets/css/criarmeta.css" />
 
 </head>
 
@@ -44,7 +44,7 @@ $usuario = AuthController::usuarioLogado();
   <div class="topbar-mobile">
 
     <img
-      src="../assets/images/logo.1.png"
+      src="../../assets/images/logo.1.png"
       alt="MetaMorfose"
       class="logo-mobile"
     />
@@ -61,7 +61,7 @@ $usuario = AuthController::usuarioLogado();
     <div class="sidebar-logo">
 
       <img
-        src="../assets/images/logo.1.png"
+        src="../../assets/images/logo.1.png"
         alt="MetaMorfose"
         class="logo-img"
       />
@@ -126,7 +126,7 @@ $usuario = AuthController::usuarioLogado();
 
       <div class="banner-illustration">
         <img
-          src="../assets/images/imagemmeta.png"
+          src="../../assets/images/imagemmeta.png"
           alt="Ilustração"
         />
       </div>
@@ -215,7 +215,7 @@ $usuario = AuthController::usuarioLogado();
   </main>
 
   <!-- SCRIPT MENU -->
-  <script src="../assets/js/menu.js" defer></script>
+  <script src="../../assets/js/menu.js" defer></script>
 
 </body>
 </html>

@@ -29,7 +29,7 @@ $usuario = AuthController::usuarioLogado();
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-  <link rel="stylesheet" href="../assets/css/detalhemeta.css" />
+  <link rel="stylesheet" href="../../assets/css/detalhemeta.css" />
 </head>
 
 <body>
@@ -50,7 +50,7 @@ $usuario = AuthController::usuarioLogado();
   <aside class="sidebar" id="sidebar">
 
     <div class="sidebar-logo">
-      <img src="../assets/images/logo.1.png" alt="MetaMorfose" class="logo-img" />
+      <img src="../../assets/images/logo.1.png" alt="MetaMorfose" class="logo-img" />
 
       <button class="btn-fechar-menu" id="btnFecharSidebar">
         <i class="fa-solid fa-xmark"></i>
@@ -104,7 +104,7 @@ $usuario = AuthController::usuarioLogado();
       </div>
 
       <div class="banner-illustration">
-        <img src="../assets/images/imagemdetalhemeta.png" alt="Ilustração" />
+        <img src="../../assets/images/imagemdetalhemeta.png" alt="Ilustração" />
       </div>
 
     </div>
@@ -244,7 +244,7 @@ $usuario = AuthController::usuarioLogado();
 
   </main>
 
-  <script src="../assets/js/menu.js" defer></script>
+  <script src="../../assets/js/menu.js" defer></script>
 
 </body>
 </html>
