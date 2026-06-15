@@ -1,21 +1,12 @@
 /**
- * Página: Nova Sessão de Estudo
- * Funcionalidades: Combobox, Sliders, Validação, Modal, Toast
- * 
- * ⚠️ Este arquivo NÃO contém funções de menu.
- * O menu deve ser carregado separadamente via menu.js
+ * Página: Nova Sessão de Estudo / Editar Sessão
+ * Integrado ao MetaController.php
  */
 
-// ── DADOS DAS METAS (substituir por busca via API/PHP depois) ──
-const metasData = {
-    1: { name: "Java" },
-    2: { name: "Python" },
-    3: { name: "JavaScript" },
-    4: { name: "Banco de Dados" },
-    5: { name: "Cloud AWS" },
-    6: { name: "DevOps" }
-};
-const metasList = Object.entries(metasData).map(([id, data]) => ({ id, name: data.name }));
+// ── ESTADO GLOBAL ──
+let metasList = [];
+let modoEdicao = false;
+let sessaoEditandoId = null;
 
 // ── CLASSE COMBOBOX ──
 class Combobox {
@@ -29,6 +20,7 @@ class Combobox {
         this.filteredOptions = [];
         this.highlightIndex = -1;
         this.isOpen = false;
+        this.selectedId = null;
 
         if (!this.input) return;
 
@@ -36,32 +28,36 @@ class Combobox {
         this.input.addEventListener('focus', () => this.open());
         this.input.addEventListener('keydown', (e) => this.onKeydown(e));
         this.input.addEventListener('blur', () => setTimeout(() => this.close(), 200));
-        
+
         if (this.clearBtn) {
-            this.clearBtn.addEventListener('mousedown', (e) => { 
-                e.preventDefault(); 
-                this.clear(); 
+            this.clearBtn.addEventListener('mousedown', (e) => {
+                e.preventDefault();
+                this.clear();
             });
         }
-        
-        this.input.addEventListener('click', () => { 
-            if (!this.input.disabled) this.toggle(); 
+
+        this.input.addEventListener('click', () => {
+            if (!this.input.disabled) this.toggle();
         });
     }
 
-    setOptions(opts) { this.options = opts || []; }
+    setOptions(opts) {
+        this.options = opts || [];
+        this.onInput();
+    }
 
     clear() {
         if (!this.input) return;
         this.input.value = '';
+        this.selectedId = null;
         if (this.clearBtn) this.clearBtn.classList.remove('visible');
         this.highlightIndex = -1;
         this.renderDropdown();
     }
 
-    toggle() { 
+    toggle() {
         if (this.input?.disabled) return;
-        this.isOpen ? this.close() : this.open(); 
+        this.isOpen ? this.close() : this.open();
     }
 
     open() {
@@ -81,7 +77,7 @@ class Combobox {
     onInput() {
         if (!this.input) return;
         const query = this.input.value.toLowerCase().trim();
-        this.filteredOptions = this.options.filter(opt => 
+        this.filteredOptions = this.options.filter(opt =>
             opt.name.toLowerCase().includes(query)
         );
         this.highlightIndex = -1;
@@ -90,18 +86,12 @@ class Combobox {
 
     renderDropdown() {
         if (!this.dropdown || !this.input) return;
-        
+
         const query = this.input.value.toLowerCase().trim();
         let html = '';
 
-        if (this.filteredOptions.length === 0 && query.length > 0) {
-            html += `<div class="combobox-empty">Nenhum resultado encontrado</div>`;
-            html += `<div class="combobox-add-option" data-value="${this.escapeHtml(this.input.value)}">
-                <i class="fa-solid fa-plus" style="font-size:10px;"></i>
-                Usar "<strong>${this.escapeHtml(this.input.value)}</strong>"
-            </div>`;
-        } else if (this.filteredOptions.length === 0) {
-            html += `<div class="combobox-empty">Comece a digitar para buscar...</div>`;
+        if (this.filteredOptions.length === 0) {
+            html = `<div class="combobox-empty">Nenhuma meta encontrada.</div>`;
         } else {
             this.filteredOptions.forEach((opt) => {
                 const name = opt.name;
@@ -117,24 +107,18 @@ class Combobox {
                 html += `<div class="combobox-option" data-id="${opt.id}" data-name="${this.escapeHtml(name)}">${displayName}</div>`;
             });
         }
+
         this.dropdown.innerHTML = html;
         this.bindDropdownEvents();
     }
 
     bindDropdownEvents() {
         if (!this.dropdown) return;
-        
+
         this.dropdown.querySelectorAll('.combobox-option').forEach(el => {
             el.addEventListener('mousedown', (e) => {
                 e.preventDefault();
                 this.selectOption(el.getAttribute('data-id'), el.getAttribute('data-name'));
-            });
-        });
-        this.dropdown.querySelectorAll('.combobox-add-option').forEach(el => {
-            el.addEventListener('mousedown', (e) => {
-                e.preventDefault();
-                const val = el.getAttribute('data-value');
-                this.selectOption(val, val);
             });
         });
     }
@@ -142,15 +126,24 @@ class Combobox {
     selectOption(id, name) {
         if (!this.input || !this.clearBtn) return;
         this.input.value = name;
+        this.selectedId = id;
         this.clearBtn.classList.add('visible');
         this.highlightIndex = -1;
         this.close();
         if (this.onSelect) this.onSelect(id, name);
     }
 
+    setValue(id, name) {
+        this.selectOption(id, name);
+    }
+
+    getSelectedId() {
+        return this.selectedId;
+    }
+
     onKeydown(e) {
         if (!this.dropdown) return;
-        
+
         const items = this.dropdown.querySelectorAll('.combobox-option');
         const count = items.length;
 
@@ -172,9 +165,6 @@ class Combobox {
             if (this.highlightIndex >= 0 && this.highlightIndex < count) {
                 const el = items[this.highlightIndex];
                 this.selectOption(el.getAttribute('data-id'), el.getAttribute('data-name'));
-            } else if (this.input?.value.trim().length > 0) {
-                const addBtn = this.dropdown.querySelector('.combobox-add-option');
-                if (addBtn) this.selectOption(addBtn.getAttribute('data-value'), this.input.value.trim());
             }
         } else if (e.key === 'Escape') {
             this.close();
@@ -195,25 +185,130 @@ class Combobox {
     }
 }
 
-// ── INICIALIZAÇÃO DA PÁGINA ──
-document.addEventListener('DOMContentLoaded', () => {
-    initCombobox();
+// ── INSTÂNCIA GLOBAL DO COMBOBOX ──
+let metaCombobox = null;
+
+// ── INICIALIZAÇÃO ──
+document.addEventListener('DOMContentLoaded', async () => {
+    await carregarMetas();
     initSliders();
     initDateInput();
     initFormActions();
-    initSidebarButtons();
-    initNavigation();
+    verificarModoEdicao();
 });
 
-// ── COMBOBOX ──
-function initCombobox() {
-    const metaInput = document.getElementById('metaInput');
-    if (!metaInput) return;
-    
-    new Combobox('metaInput', 'metaDropdown', 'metaClear', metasList, (id, name) => {
+// ── BUSCA METAS REAIS DA API ──
+async function carregarMetas() {
+    try {
+        const res = await fetch('../controllers/MetaController.php?acao=listar_metas', {
+            credentials: 'include'
+        });
+        const json = await res.json();
+
+        if (json.status === 'success') {
+            metasList = json.data.map(m => ({ id: String(m.id), name: m.titulo }));
+        } else {
+            metasList = [];
+        }
+    } catch (e) {
+        console.error('Erro ao carregar metas:', e);
+        metasList = [];
+    }
+
+    // Inicia combobox depois de ter os dados
+    metaCombobox = new Combobox('metaInput', 'metaDropdown', 'metaClear', metasList, (id, name) => {
         console.log('Meta selecionada:', id, name);
-        // Aqui você pode adicionar lógica extra ao selecionar uma meta
     });
+    metaCombobox.setOptions(metasList);
+}
+
+// ── VERIFICA SE É EDIÇÃO (URL: ?sessao_id=X&meta_id=Y) ──
+async function verificarModoEdicao() {
+    const params = new URLSearchParams(window.location.search);
+    sessaoEditandoId = params.get('sessao_id');
+    const metaIdParam = params.get('meta_id');
+
+    if (sessaoEditandoId) {
+        modoEdicao = true;
+        document.querySelector('.form-title') && (document.querySelector('.form-title').textContent = 'Editar Sessão de Estudo');
+        const registerBtn = document.getElementById('registerBtn');
+        if (registerBtn) registerBtn.textContent = 'SALVAR ALTERAÇÕES';
+
+        // Busca sessões da meta para preencher o form
+        if (metaIdParam) {
+            await preencherFormEdicao(sessaoEditandoId, metaIdParam);
+        }
+    } else if (metaIdParam) {
+        // Veio da tela de detalhes com meta pré-selecionada
+        aguardarComboboxESelecionar(metaIdParam);
+    }
+}
+
+// Aguarda o combobox carregar e pré-seleciona a meta
+function aguardarComboboxESelecionar(metaId) {
+    const tentativa = setInterval(() => {
+        if (metaCombobox && metasList.length > 0) {
+            clearInterval(tentativa);
+            const meta = metasList.find(m => m.id === String(metaId));
+            if (meta) metaCombobox.setValue(meta.id, meta.name);
+        }
+    }, 100);
+}
+
+// Preenche o formulário no modo edição
+async function preencherFormEdicao(sessaoId, metaId) {
+    try {
+        const res = await fetch(`../controllers/MetaController.php?acao=listar_sessoes_meta&meta_id=${metaId}`, {
+            credentials: 'include'
+        });
+        const json = await res.json();
+
+        if (json.status === 'success') {
+            const sessao = json.data.find(s => String(s.id) === String(sessaoId));
+            if (!sessao) return;
+
+            // Preenche data
+            const dateInput = document.getElementById('dateInput');
+            if (dateInput) dateInput.value = sessao.data;
+
+            // Preenche observação
+            const obsInput = document.getElementById('obsInput');
+            if (obsInput) obsInput.value = sessao.observacao || '';
+
+            // Preenche tempo (converte decimal para horas/minutos)
+            const tempo = parseFloat(sessao.tempo_estudado) || 0;
+            const horas = Math.floor(tempo);
+            const minutos = Math.round((tempo - horas) * 60);
+            const hourInput = document.getElementById('hourInput');
+            const minuteInput = document.getElementById('minuteInput');
+            if (hourInput) hourInput.value = horas || '';
+            if (minuteInput) minuteInput.value = minutos || '';
+
+            // Preenche sliders
+            if (sessao.foco) setSliderValue('focus', parseInt(sessao.foco));
+            if (sessao.progresso) setSliderValue('progress', parseInt(sessao.progresso));
+
+            // Pré-seleciona a meta
+            aguardarComboboxESelecionar(metaId);
+        }
+    } catch (e) {
+        console.error('Erro ao carregar sessão para edição:', e);
+    }
+}
+
+// Define valor de um slider programaticamente
+function setSliderValue(sliderType, value) {
+    const wrapper = document.querySelector(`.slider-wrapper[data-slider="${sliderType}"]`);
+    if (!wrapper) return;
+
+    const fill = wrapper.querySelector('.slider-fill');
+    const thumb = wrapper.querySelector('.slider-thumb');
+    const valueDisplay = wrapper.querySelector('.slider-value');
+
+    const leftPercent = (value - 1) / 9 * 100;
+    if (fill) fill.style.width = leftPercent + '%';
+    if (thumb) { thumb.style.left = leftPercent + '%'; thumb.setAttribute('data-value', value); }
+    if (valueDisplay) valueDisplay.textContent = value;
 }
 
 // ── SLIDERS ──
@@ -226,9 +321,9 @@ function initSlider(wrapper) {
     const fill = wrapper.querySelector('.slider-fill');
     const thumb = wrapper.querySelector('.slider-thumb');
     const valueDisplay = wrapper.querySelector('.slider-value');
-    
+
     if (!track || !fill || !thumb || !valueDisplay) return;
-    
+
     let isDragging = false;
 
     function updateSlider(clientX) {
@@ -237,41 +332,31 @@ function initSlider(wrapper) {
         percent = Math.max(0, Math.min(1, percent));
         const displayValue = Math.max(1, Math.min(10, Math.round(percent * 9) + 1));
         const leftPercent = (displayValue - 1) / 9 * 100;
-        
+
         fill.style.width = leftPercent + '%';
         thumb.style.left = leftPercent + '%';
         thumb.setAttribute('data-value', displayValue);
         valueDisplay.textContent = displayValue;
     }
 
-    const startDrag = (e) => { 
-        isDragging = true; 
-        e.preventDefault(); 
-    };
-    
-    const moveDrag = (e) => { 
+    const startDrag = (e) => { isDragging = true; e.preventDefault(); };
+    const moveDrag = (e) => {
         if (isDragging) {
             const clientX = e.clientX || e.touches?.[0]?.clientX;
             if (clientX) updateSlider(clientX);
         }
     };
-    
     const endDrag = () => { isDragging = false; };
 
-    // Mouse events
     thumb.addEventListener('mousedown', startDrag);
-    track.addEventListener('mousedown', (e) => { 
-        startDrag(e); 
-        updateSlider(e.clientX); 
-    });
+    track.addEventListener('mousedown', (e) => { startDrag(e); updateSlider(e.clientX); });
     document.addEventListener('mousemove', moveDrag);
     document.addEventListener('mouseup', endDrag);
 
-    // Touch events
     thumb.addEventListener('touchstart', startDrag, { passive: false });
-    track.addEventListener('touchstart', (e) => { 
-        startDrag(e); 
-        if (e.touches[0]) updateSlider(e.touches[0].clientX); 
+    track.addEventListener('touchstart', (e) => {
+        startDrag(e);
+        if (e.touches[0]) updateSlider(e.touches[0].clientX);
     }, { passive: false });
     document.addEventListener('touchmove', moveDrag, { passive: false });
     document.addEventListener('touchend', endDrag);
@@ -287,153 +372,142 @@ function initDateInput() {
 
 // ── AÇÕES DO FORMULÁRIO ──
 function initFormActions() {
-    // Botão Registrar
     const registerBtn = document.getElementById('registerBtn');
-    if (registerBtn) {
-        registerBtn.addEventListener('click', handleRegister);
-    }
+    if (registerBtn) registerBtn.addEventListener('click', handleRegister);
 
-    // Botão Modal OK
     const modalOkBtn = document.getElementById('modalOkBtn');
     if (modalOkBtn) {
         modalOkBtn.addEventListener('click', () => {
             const modal = document.getElementById('successModal');
             if (modal) modal.classList.remove('active');
-            resetForm();
-            showToast('Sessão salva com sucesso!');
+            if (modoEdicao) {
+                window.location.href = 'visualizacaosessao.php';
+            } else {
+                resetForm();
+            }
         });
     }
 
-    // Botão Cancelar
     const cancelBtn = document.getElementById('cancelBtn');
     if (cancelBtn) {
         cancelBtn.addEventListener('click', () => {
-            resetForm();
-            showToast('Formulário limpo.');
+            window.history.back();
         });
     }
 }
 
-// ── BOTÕES DA SIDEBAR (sem menu, apenas ações) ──
-function initSidebarButtons() {
-    // Botão "Criar nova meta"
-    const btnNovaMeta = document.getElementById('newGoalBtn');
-    if (btnNovaMeta) {
-        btnNovaMeta.addEventListener('click', (e) => {
-            e.preventDefault();
-            showToast('Redirecionando para criação de nova meta...');
-            // window.location.href = '../pages/criarmeta.html';
-        });
-    }
-
-    // Botão "Sair"
-    const btnSair = document.querySelector('.sidebar-sair');
-    if (btnSair) {
-        btnSair.addEventListener('click', (e) => {
-            e.preventDefault();
-            showToast('Saindo...');
-            // window.location.href = '../auth/logout.php';
-        });
-    }
+// ── PEGA VALOR DO SLIDER ──
+function getSliderValue(sliderType) {
+    const wrapper = document.querySelector(`.slider-wrapper[data-slider="${sliderType}"]`);
+    if (!wrapper) return null;
+    const thumb = wrapper.querySelector('.slider-thumb');
+    return thumb ? parseInt(thumb.getAttribute('data-value')) : null;
 }
 
-// ── NAVEGAÇÃO (apenas marca ativo, sem controle de menu) ──
-function initNavigation() {
-    const navItems = document.querySelectorAll('.nav-item');
-    navItems.forEach(item => {
-        item.addEventListener('click', (e) => {
-            e.preventDefault();
-            navItems.forEach(i => i.classList.remove('active'));
-            item.classList.add('active');
-            // Apenas marca como ativo - o menu.js cuida do resto se estiver presente
-        });
-    });
-}
-
-// ── VALIDAÇÃO E REGISTRO ──
-function handleRegister() {
-    const metaInput = document.getElementById('metaInput');
+// ── VALIDAÇÃO E ENVIO ──
+async function handleRegister() {
+    const metaId = metaCombobox?.getSelectedId();
     const dateInput = document.getElementById('dateInput');
     const hourInput = document.getElementById('hourInput');
     const minuteInput = document.getElementById('minuteInput');
-    
-    const meta = metaInput?.value.trim();
+    const obsInput = document.getElementById('obsInput');
+
     const date = dateInput?.value;
-    const horas = hourInput?.value.trim();
-    const minutos = minuteInput?.value.trim();
+    const horas = parseInt(hourInput?.value) || 0;
+    const minutos = parseInt(minuteInput?.value) || 0;
+    const observacao = obsInput?.value.trim() || '';
+    const foco = getSliderValue('focus');
+    const progresso = getSliderValue('progress');
 
     // Validação
-    if (!meta) { showToast('Por favor, selecione ou digite a meta.'); return; }
+    if (!metaId) { showToast('Por favor, selecione uma meta.'); return; }
     if (!date) { showToast('Por favor, selecione a data.'); return; }
-    
-    // Verifica se pelo menos um dos campos foi preenchido
-    if ((!horas || horas === '0') && (!minutos || minutos === '0')) { 
-        showToast('Por favor, informe o tempo estudado.'); 
-        return; 
+    if (horas === 0 && minutos === 0) { showToast('Por favor, informe o tempo estudado.'); return; }
+
+    // Converte para decimal (ex: 1h 30min = 1.5)
+    const tempoDecimal = horas + (minutos / 60);
+
+    const payload = {
+        meta_id: metaId,
+        data: date,
+        tempo_estudado: tempoDecimal,
+        observacao,
+        foco,
+        progresso
+    };
+
+    const registerBtn = document.getElementById('registerBtn');
+    if (registerBtn) { registerBtn.disabled = true; registerBtn.textContent = 'Salvando...'; }
+
+    try {
+        let acao, mensagemSucesso;
+
+        if (modoEdicao) {
+            acao = 'atualizar_sessao';
+            payload.id = sessaoEditandoId;
+            mensagemSucesso = 'Sessão atualizada!';
+        } else {
+            acao = 'criar_sessao';
+            mensagemSucesso = 'Sessão registrada!';
+        }
+
+        const res = await fetch('../controllers/MetaController.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ acao, ...payload }),
+            credentials: 'include'
+        });
+
+        const json = await res.json();
+
+        if (json.status === 'success') {
+            // Atualiza texto do modal
+            const modalMsg = document.querySelector('.modal p');
+            if (modalMsg) modalMsg.textContent = mensagemSucesso + ' Continue assim!';
+            const modal = document.getElementById('successModal');
+            if (modal) modal.classList.add('active');
+        } else {
+            showToast('Erro: ' + json.message);
+        }
+    } catch (e) {
+        console.error('Erro:', e);
+        showToast('Erro de conexão. Tente novamente.');
+    } finally {
+        if (registerBtn) {
+            registerBtn.disabled = false;
+            registerBtn.textContent = modoEdicao ? 'SALVAR ALTERAÇÕES' : 'REGISTRAR';
+        }
     }
-
-    // Junta horas e minutos no formato "Xh Ymin"
-    const h = horas && horas !== '0' ? horas : '0';
-    const m = minutos && minutos !== '0' ? minutos : '0';
-    const tempoFormatado = `${h}h ${m}min`;
-
-    console.log('Tempo registrado:', tempoFormatado);
-    // Aqui você pode enviar 'tempoFormatado' para sua API/PHP
-
-    const modal = document.getElementById('successModal');
-    if (modal) modal.classList.add('active');
 }
 
 // ── RESET DO FORMULÁRIO ──
 function resetForm() {
-    // Combobox
     const metaInput = document.getElementById('metaInput');
     const metaClear = document.getElementById('metaClear');
     if (metaInput) metaInput.value = '';
     if (metaClear) metaClear.classList.remove('visible');
+    if (metaCombobox) metaCombobox.selectedId = null;
 
-    // Campos de texto
     const obsInput = document.getElementById('obsInput');
     if (obsInput) obsInput.value = '';
-    
-    // Inputs de horas e minutos (NOVO)
+
     const hourInput = document.getElementById('hourInput');
     const minuteInput = document.getElementById('minuteInput');
     if (hourInput) hourInput.value = '';
     if (minuteInput) minuteInput.value = '';
-    
-    // Data
+
     const dateInput = document.getElementById('dateInput');
     if (dateInput) dateInput.value = new Date().toISOString().split('T')[0];
 
-    // Sliders
-    document.querySelectorAll('.slider-wrapper').forEach(wrapper => {
-        const fill = wrapper.querySelector('.slider-fill');
-        const thumb = wrapper.querySelector('.slider-thumb');
-        const valueDisplay = wrapper.querySelector('.slider-value');
-        if (!fill || !thumb || !valueDisplay) return;
-        
-        const defaultValue = wrapper.dataset.slider === 'focus' ? 7 : 6;
-        const leftPercent = (defaultValue - 1) / 9 * 100;
-        fill.style.width = leftPercent + '%';
-        thumb.style.left = leftPercent + '%';
-        thumb.setAttribute('data-value', defaultValue);
-        valueDisplay.textContent = defaultValue;
-    });
+    setSliderValue('focus', 7);
+    setSliderValue('progress', 6);
 }
 
 // ── TOAST ──
 function showToast(message) {
     const toast = document.getElementById('toast');
     if (!toast) return;
-    
     toast.textContent = message;
     toast.classList.add('show');
-    
-    setTimeout(() => {
-        toast.classList.remove('show');
-    }, 3000);
+    setTimeout(() => toast.classList.remove('show'), 3000);
 }
-
-
-

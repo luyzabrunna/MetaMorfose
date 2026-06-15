@@ -126,13 +126,11 @@ $usuario = AuthController::usuarioLogado();
           <span class="campo-valor">30/04/2026</span>
         </div>
 
+        <!-- Status -->
         <div class="meta-campo">
           <span class="campo-label">Status</span>
-
-          <span class="campo-valor">
-            <span class="badge em-andamento">Em andamento</span>
-          </span>
-        </div>
+          <span class="campo-valor meta-status-badge"></span>
+         </div>
 
       </div>
 
@@ -245,6 +243,7 @@ $usuario = AuthController::usuarioLogado();
   </main>
 
   <script src="../../assets/js/menu.js" defer></script>
+  <script src="../../assets/js/detalhemeta.js"></script>
 
 </body>
 </html>

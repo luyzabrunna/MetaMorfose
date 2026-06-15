@@ -246,6 +246,7 @@ $nomeUsuario = $usuario['nome'] ?? 'Usuário';
 
   <!-- JS -->
   <script src="../../assets/js/menu.js" defer></script>
+  <script src="../../assets/js/visualizacaosessao.js"></script>
 
 </body>
 </html>

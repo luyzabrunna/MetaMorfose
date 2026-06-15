@@ -352,6 +352,7 @@ $usuario = AuthController::usuarioLogado();
   </main>
 
   <script src="../../assets/js/menu.js" defer></script>
+  <script src="../../assets/js/visualizacaometas.js"></script>
 
 </body>
 </html>
