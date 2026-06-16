@@ -89,7 +89,7 @@ METAMORFOSE/
 
 **1. Clone o repositório**
 ```bash
-git clone https://github.com/seu-usuario/metamorfose.git
+git clone https://github.com/luyzabrunna/MetaMorfose.git
 cd metamorfose
 ```
 
