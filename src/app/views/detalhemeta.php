@@ -39,7 +39,7 @@ $usuario = AuthController::usuarioLogado();
 
   <!-- TOPBAR MOBILE -->
   <div class="topbar-mobile">
-    <img src="../assets/images/logo.1.png" alt="MetaMorfose" class="logo-mobile" />
+    <img src="../../assets/images/logo.1.png" alt="MetaMorfose" class="logo-mobile" />
 
     <button class="btn-hamburguer" id="btnHamburguer">
       <i class="fa-solid fa-bars"></i>
@@ -124,7 +124,7 @@ $usuario = AuthController::usuarioLogado();
        <div class="meta-campo meta-prazo">
           <span class="campo-label">Prazo</span>
           <span class="campo-valor"></span>
-        </div>
+          </div>
 
         <!-- Status -->
         <div class="meta-campo">

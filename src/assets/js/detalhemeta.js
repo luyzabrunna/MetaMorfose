@@ -33,11 +33,17 @@ async function carregarMeta(metaId) {
 
 // ── PREENCHE DADOS DA META ──
 function preencherMeta(meta) {
+
     const tituloEl = document.querySelector('.meta-titulo');
     if (tituloEl) tituloEl.textContent = meta.titulo;
 
     const prazoEl = document.querySelector('.meta-prazo .campo-valor');
-    if (prazoEl) prazoEl.textContent = new Date(meta.prazo).toLocaleDateString('pt-BR');
+
+    if (prazoEl && meta.prazo) {
+        const data = meta.prazo.split('T')[0]; // remove horário se existir
+        const [ano, mes, dia] = data.split('-');
+        prazoEl.textContent = `${dia}/${mes}/${ano}`;
+    }
 
     const descEl = document.querySelector('.meta-descricao p');
     if (descEl) descEl.textContent = meta.descricao;
@@ -49,22 +55,14 @@ function preencherMeta(meta) {
     if (pctEl) pctEl.textContent = Math.round(meta.progresso) + '%';
 
     const horasEl = document.querySelector('.horas-texto');
-    if (horasEl) horasEl.textContent = `${meta.horas_estudadas}h de ${meta.horas_planejadas}h estudadas`;
+    if (horasEl) horasEl.textContent =
+        `${meta.horas_estudadas}h de ${meta.horas_planejadas}h estudadas`;
 
-    // Status badge
     const statusEl = document.querySelector('.meta-status-badge');
     if (statusEl) {
         const statusTexto = meta.status.replace('_', ' ');
         statusEl.textContent = statusTexto;
         statusEl.className = `campo-valor meta-status-badge badge ${meta.status}`;
-    }
-
-    // Botão Nova Sessão com meta_id
-    const btnNovaSessao = document.getElementById('btnNovaSessao');
-    if (btnNovaSessao) {
-        btnNovaSessao.onclick = () => {
-            window.location.href = `sessaoestudo.php?meta_id=${meta.id}`;
-        };
     }
 }
 
