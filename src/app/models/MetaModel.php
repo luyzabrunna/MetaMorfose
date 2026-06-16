@@ -98,19 +98,19 @@ class MetaModel {
 
     public function excluirSessao($sessao_id, $usuario_id) {
 
-    // Primeiro verifica se a sessão pertence ao usuário
-    $sql = "SELECT s.id FROM sessao s 
-            JOIN meta m ON s.meta_id = m.id 
-            WHERE s.id = ? AND m.usuario_id = ?";
-    $stmt = $this->pdo->prepare($sql);
-    $stmt->execute([$sessao_id, $usuario_id]);
-    if (!$stmt->fetch()) return false;
+        // Primeiro verifica se a sessão pertence ao usuário
+         $sql = "SELECT s.id FROM sessao s 
+                JOIN meta m ON s.meta_id = m.id 
+                WHERE s.id = ? AND m.usuario_id = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$sessao_id, $usuario_id]);
+        if (!$stmt->fetch()) return false;
 
-    // Depois exclui só da tabela sessao (sem JOIN)
-    $sql = "DELETE FROM sessao WHERE id = ?";
-    $stmt = $this->pdo->prepare($sql);
-    return $stmt->execute([$sessao_id]);
-}
+        // Depois exclui só da tabela sessao (sem JOIN)
+        $sql = "DELETE FROM sessao WHERE id = ?";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute([$sessao_id]);
+    }
 
     /* ============ MÉTODOS PARA O DASHBOARD ============ */
  
@@ -125,7 +125,7 @@ class MetaModel {
         $stmt->bindValue(2, (int) $limite, PDO::PARAM_INT); // ← cast para int
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
+    }
 
     // 3 sessões mais recentes
     public function listarSessoesRecentes($usuario_id, $limite = 3) {
