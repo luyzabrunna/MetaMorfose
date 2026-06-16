@@ -103,4 +103,59 @@ class MetaModel {
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([$sessao_id, $usuario_id]);
     }
+
+    /* ============ MÉTODOS PARA O DASHBOARD ============ */
+ 
+    // 3 metas mais recentes
+    public function listarMetasRecentes($usuario_id, $limite = 3) {
+        $sql = "SELECT * FROM meta 
+                WHERE usuario_id = ? 
+                ORDER BY criado_em DESC 
+                LIMIT ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(1, $usuario_id, PDO::PARAM_INT);
+        $stmt->bindValue(2, (int) $limite, PDO::PARAM_INT); // ← cast para int
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+    // 3 sessões mais recentes
+    public function listarSessoesRecentes($usuario_id, $limite = 3) {
+        $sql = "SELECT s.*, m.titulo as meta_titulo 
+                FROM sessao s 
+                JOIN meta m ON s.meta_id = m.id 
+                WHERE m.usuario_id = ? 
+                ORDER BY s.data DESC, s.criado_em DESC 
+                LIMIT ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(1, $usuario_id, PDO::PARAM_INT);
+        $stmt->bindValue(2, (int) $limite, PDO::PARAM_INT); // ← cast para int
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+ 
+    // Meta com prazo mais próximo (não concluída)
+    public function metaPrazoMaisProximo($usuario_id) {
+        $sql = "SELECT * FROM meta 
+                WHERE usuario_id = ? 
+                AND status != 'concluida' 
+                AND prazo >= CURDATE() 
+                ORDER BY prazo ASC 
+                LIMIT 1";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$usuario_id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+ 
+    // Total de horas estudadas pelo usuário
+    public function totalHorasEstudadas($usuario_id) {
+        $sql = "SELECT COALESCE(SUM(s.tempo_estudado), 0) as total 
+                FROM sessao s 
+                JOIN meta m ON s.meta_id = m.id 
+                WHERE m.usuario_id = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$usuario_id]);
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+        return round($resultado['total'], 1);
+    }
 }

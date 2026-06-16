@@ -31,7 +31,7 @@ try {
         case 'criar_meta':
             $input = json_decode(file_get_contents('php://input'), true);
 
-            // ✅ CORREÇÃO: JS envia 'horas_planejadas' (já em decimal), não 'horas'
+            // JS envia 'horas_planejadas' (já em decimal), não 'horas'
             $horas = isset($input['horas_planejadas'])
                 ? (float) $input['horas_planejadas']
                 : converterTempoParaDecimal($input['horas'] ?? '00:00');
@@ -77,13 +77,13 @@ try {
         case 'atualizar_meta':
             $input = json_decode(file_get_contents('php://input'), true);
 
-            // ✅ CORREÇÃO: JS não envia 'status', então preserva o status atual
+            //  JS não envia 'status', então preserva o status atual
             if (!isset($input['status'])) {
                 $metaAtual = $model->buscarPorId($input['id'], $usuario_id);
                 $input['status'] = $metaAtual['status'] ?? 'nao_iniciada';
             }
 
-            // ✅ CORREÇÃO: JS envia 'horas_planejadas' já em decimal
+            // JS envia 'horas_planejadas' já em decimal
             // Garante que o campo correto está presente no array $input
             if (!isset($input['horas_planejadas']) && isset($input['horas'])) {
                 $input['horas_planejadas'] = converterTempoParaDecimal($input['horas']);
