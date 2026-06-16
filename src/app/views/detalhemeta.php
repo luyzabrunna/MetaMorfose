@@ -118,12 +118,12 @@ $usuario = AuthController::usuarioLogado();
 
         <div class="meta-campo">
           <span class="campo-label">Título</span>
-          <span class="campo-valor">Estudar Java</span>
+          <span class="campo-valor meta-titulo"></span>
         </div>
 
-        <div class="meta-campo">
+       <div class="meta-campo meta-prazo">
           <span class="campo-label">Prazo</span>
-          <span class="campo-valor">30/04/2026</span>
+          <span class="campo-valor"></span>
         </div>
 
         <!-- Status -->
