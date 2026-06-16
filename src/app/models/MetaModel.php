@@ -97,12 +97,20 @@ class MetaModel {
     }
 
     public function excluirSessao($sessao_id, $usuario_id) {
-        $sql = "DELETE s FROM sessao s 
-                JOIN meta m ON s.meta_id = m.id 
-                WHERE s.id = ? AND m.usuario_id = ?";
-        $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute([$sessao_id, $usuario_id]);
-    }
+
+    // Primeiro verifica se a sessão pertence ao usuário
+    $sql = "SELECT s.id FROM sessao s 
+            JOIN meta m ON s.meta_id = m.id 
+            WHERE s.id = ? AND m.usuario_id = ?";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute([$sessao_id, $usuario_id]);
+    if (!$stmt->fetch()) return false;
+
+    // Depois exclui só da tabela sessao (sem JOIN)
+    $sql = "DELETE FROM sessao WHERE id = ?";
+    $stmt = $this->pdo->prepare($sql);
+    return $stmt->execute([$sessao_id]);
+}
 
     /* ============ MÉTODOS PARA O DASHBOARD ============ */
  
