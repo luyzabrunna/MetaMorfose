@@ -65,7 +65,6 @@ METAMORFOSE/
 │   │       ├── criarmeta.php
 │   │       ├── dashboard.php
 │   │       ├── detalhemeta.php
-│   │       ├── landingpage.php
 │   │       ├── login.php
 │   │       ├── sessaoestudo.php
 │   │       ├── visualizacaometas.php
